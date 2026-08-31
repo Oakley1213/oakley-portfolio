@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oakley — UI/UX Designer Portfolio</title>
+<meta name="description" content="UI/UX 設計師作品集。RightCode 兒童程式學習網站、Virtuosi 世界名畫收藏 App。">
+
+<!-- Open Graph（分享到 LINE / FB / 履歷連結時的預覽） -->
+<meta property="og:title" content="Oakley — UI/UX Designer Portfolio">
+<meta property="og:description" content="兩個從研究到介面的完整設計案例。">
+<meta property="og:image" content="assets/og-cover.jpg">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700&family=Schibsted+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body id="top">
+
+<a class="skip-link" href="#main">跳到主要內容</a>
+
+<!-- 側邊捲動進度軌（手機版會變成頂端的細橫條） -->
+<div class="rail" aria-hidden="true"><span class="rail__fill"></span></div>
+
+
+<!-- ═══ 導覽列：Wordmark（回首頁）+ 關於我 + 聯絡我 ═══ -->
+<header class="site-head">
+  <div class="site-head__inner container">
+    <a class="wordmark" href="index.html" aria-label="Oakley，回到首頁">Oakley<span class="wordmark__dot"></span></a>
+
+    <nav class="nav" id="site-nav" aria-label="主要導覽">
+      <ul class="nav__list">
+        <li><a class="nav__link" href="#about">關於我</a></li>
+        <li><a class="nav__link" href="#contact">聯絡我</a></li>
+      </ul>
+    </nav>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="開啟選單">
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+    </button>
+  </div>
+</header>
+
+
+<main id="main">
+
+  <!-- ═══ 01 HERO ═══ -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <p class="eyebrow">UI/UX Designer · Taipei</p>
+
+      <h1 class="hero__title">
+        把散亂的<span class="hero__em">研究結果</span>，<br>
+        收成一眼就懂的<span class="hero__em">介面</span>。
+      </h1>
+
+      <p class="hero__lead">
+        <!-- ✏️ 這段用你自己的話改寫，2 句話講完「你怎麼工作」 -->
+        我習慣從問卷與訪談開始，把需求整理成資訊架構，再一路做到高保真介面與前端實作。
+        下面兩個案例，完整記錄了這個過程。
+      </p>
+
+      <ul class="hero__meta">
+        <li><span class="meta__k">現況</span><span class="meta__v">開放全職機會<!-- ✏️ --></span></li>
+        <li><span class="meta__k">專長</span><span class="meta__v">使用者研究 · 資訊架構 · UI 設計 · 前端切版</span></li>
+        <li><span class="meta__k">工具</span><span class="meta__v">Figma · HTML/SCSS · JavaScript · React</span></li>
+      </ul>
+
+      <a class="scroll-cue" href="#work">
+        <span>兩個案例</span>
+        <span class="scroll-cue__line" aria-hidden="true"></span>
+      </a>
+    </div>
+  </section>
+
+
+  <!--
+    ═══ 02 專案區塊（核心）═══
+    兩張大型預覽卡片，整張可點擊，直接導向獨立的專案頁。
+  -->
+  <section class="section work" id="work">
+    <div class="container">
+      <header class="section__head">
+        <p class="eyebrow">Selected work</p>
+        <h2 class="section__title">兩個完整的設計案例</h2>
+      </header>
+
+      <ul class="work__list">
+
+        <!-- 卡片 1 → project-rightcode.html -->
+        <li class="pcard" data-project="rightcode">
+          <a class="pcard__link" href="project-rightcode.html">
+            <div class="pcard__media">
+              <div class="ph ph--16x9" data-ph="RightCode 首頁主視覺　assets/rightcode/hero.png">
+                <img src="assets/rightcode/hero.png" alt="RightCode 首頁主視覺" loading="lazy">
+              </div>
+            </div>
+
+            <div class="pcard__body">
+              <div class="pcard__main">
+                <p class="pcard__index">01</p>
+                <h3 class="pcard__title">RightCode 來code</h3>
+                <p class="pcard__sub">給國小到國中孩子的程式學習網站</p>
+                <p class="pcard__desc">用故事、闖關與 IP 角色，把「太複雜」的程式語言變成孩子敢動手的第一堂課。</p>
+              </div>
+
+              <div class="pcard__aside">
+                <ul class="tag-list">
+                  <li class="tag">UI/UX</li>
+                  <li class="tag">Web Design</li>
+                  <li class="tag">User Research</li>
+                  <li class="tag">Front-end</li>
+                </ul>
+                <span class="pcard__cta">看設計流程</span>
+              </div>
+            </div>
+          </a>
+        </li>
+
+        <!-- 卡片 2 → project-virtuosi.html -->
+        <li class="pcard" data-project="virtuosi">
+          <a class="pcard__link" href="project-virtuosi.html">
+            <div class="pcard__media">
+              <div class="ph ph--16x9" data-ph="Virtuosi 主視覺　assets/virtuosi/hero.png">
+                <img src="assets/virtuosi/hero.png" alt="Virtuosi 主視覺" loading="lazy">
+              </div>
+            </div>
+
+            <div class="pcard__body">
+              <div class="pcard__main">
+                <p class="pcard__index">02</p>
+                <h3 class="pcard__title">Virtuosi</h3>
+                <p class="pcard__sub">西洋經典名畫介紹與收藏 App</p>
+                <p class="pcard__desc">在一張畫、一段生平、一個時期之間，安排出讓人願意一直往下看的閱讀層級。</p>
+              </div>
+
+              <div class="pcard__aside">
+                <ul class="tag-list">
+                  <li class="tag">UI/UX</li>
+                  <li class="tag">App Design</li>
+                  <li class="tag">Prototyping</li>
+                </ul>
+                <span class="pcard__cta">看畫面思考</span>
+              </div>
+            </div>
+          </a>
+        </li>
+
+      </ul>
+    </div>
+  </section>
+
+ <!-- ═══ 03 關於我 ═══ -->
+ <section class="section about" id="about">
+  <div class="container">
+    <header class="section__head">
+      <p class="eyebrow">About</p>
+      <h2 class="section__title">關於我</h2>
+    </header>
+
+    <div class="about__grid">
+      <div class="about__portrait">
+        <div class="ph ph--3x4" data-ph="個人照（可省略）　assets/portrait.jpg">
+          <!-- <img src="assets/portrait.jpg" alt="Oakley"> -->
+        </div>
+      </div>
+
+      <div class="about__text prose">
+        <p><!-- ✏️ 第一段：你是誰、你怎麼開始做設計。 -->（第一段：你是誰、你怎麼開始做設計。）</p>
+        <p><!-- ✏️ 第二段：你最擅長什麼、想找什麼樣的團隊。 -->（第二段：你最擅長什麼、想找什麼樣的團隊。）</p>
+
+        <ul class="skill-list">
+          <li class="skill-list__group">
+            <h4>設計</h4>
+            <p>使用者研究 · 資訊架構 · 線框稿 · UI 設計 · 設計系統 · 互動原型</p>
+          </li>
+          <li class="skill-list__group">
+            <h4>開發</h4>
+            <p>HTML · SCSS · JavaScript · React · RWD 切版</p>
+          </li>
+          <li class="skill-list__group">
+            <h4>工具</h4>
+            <p>Figma · Illustrator · Photoshop · Git</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+  <!-- ═══ 04 聯絡我 ═══ -->
+  <section class="section contact" id="contact">
+    <div class="container">
+      <p class="eyebrow">Contact</p>
+      <h2 class="contact__title">有適合的位置嗎？<br>我很想聊聊。</h2>
+
+      <a class="contact__mail" href="mailto:your@email.com">your@email.com<!-- ✏️ --></a>
+
+      <ul class="contact__links">
+        <li><a href="#" target="_blank" rel="noopener">履歷 PDF<!-- ✏️ --></a></li>
+        <li><a href="#" target="_blank" rel="noopener">Figma<!-- ✏️ --></a></li>
+        <li><a href="#" target="_blank" rel="noopener">GitHub<!-- ✏️ --></a></li>
+        <li><a href="#" target="_blank" rel="noopener">LinkedIn<!-- ✏️ --></a></li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+
+<footer class="site-foot">
+  <div class="container site-foot__inner">
+    <p>© 2026 Oakley</p>
+    <p>Designed &amp; built by me</p>
+    <a class="to-top" href="#top">回到頂端 ↑</a>
+  </div>
+</footer>
+
+<script src="main.js" defer></script>
+</body>
+</html>

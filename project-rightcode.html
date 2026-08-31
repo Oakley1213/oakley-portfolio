@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RightCode 來code — Oakley</title>
+<meta name="description" content="國小程式學習網站的設計流程與最終 UI：244 份問卷、資訊架構取捨、首頁四次改版。">
+
+<meta property="og:title" content="RightCode 來code — Case Study">
+<meta property="og:description" content="從 244 份問卷到上線介面的完整設計流程。">
+<meta property="og:image" content="assets/rightcode/hero.png">
+<meta property="og:type" content="article">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700&family=Schibsted+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<!-- data-project 只影響左側進度軌的顏色，識別色仍是柿橘 -->
+<body id="top" data-project="rightcode">
+
+<a class="skip-link" href="#main">跳到主要內容</a>
+
+<div class="rail" aria-hidden="true"><span class="rail__fill"></span></div>
+
+
+<!-- ═══ 導覽列：← 回到首頁 ═══ -->
+<header class="site-head">
+  <div class="site-head__inner container">
+    <a class="back-link" href="index.html">
+      <span class="back-link__arrow" aria-hidden="true">←</span>
+      <span>回到首頁</span>
+    </a>
+    <p class="head-tail">Case 01 · RightCode</p>
+  </div>
+</header>
+
+
+<main id="main">
+
+  <article class="case">
+
+    <!-- ═══ 專案頁首 ═══ -->
+    <header class="page-hero">
+      <div class="container">
+        <p class="eyebrow">Case 01 — 國小程式學習網站</p>
+        <h1 class="page-hero__title">RightCode 來code</h1>
+        <p class="page-hero__tagline">用程式創造未來，用英語與世界接軌。</p>
+
+        <div class="ph ph--16x9 page-hero__cover" data-ph="首頁完整視覺　assets/rightcode/hero.png">
+            <img src="assets/rightcode/hero.png" alt="RightCode 首頁完整視覺">
+          </div>
+      </div>
+    </header>
+
+
+    <!-- ─────────── 00 事實欄 ─────────── -->
+    <section class="stage" id="s00">
+      <div class="container">
+        <header class="stage__head">
+          <p class="stage__num">00</p>
+          <h2 class="stage__title">專案概況</h2>
+        </header>
+
+        <dl class="factbar">
+          <div class="factbar__item">
+            <dt>我的角色</dt>
+            <dd><!-- ✏️ 例：使用者研究 · 視覺設計 · 前端切版 -->視覺設計 · 前端實作</dd>
+          </div>
+          <div class="factbar__item">
+            <dt>時程</dt>
+            <dd>15 週（W2–W15）</dd>
+          </div>
+          <div class="factbar__item">
+            <dt>團隊</dt>
+            <dd>4 人小組</dd>
+          </div>
+          <div class="factbar__item">
+            <dt>工具</dt>
+            <dd>Figma · SCSS · JavaScript · React</dd>
+          </div>
+        </dl>
+
+        <div class="btn-row">
+          <a class="btn btn--solid" href="https://www.figma.com/proto/8WWPICzNsTXUxvB6uJl1gG/UI?node-id=1596-2504&viewport=-5785%2C-7744%2C0.22&t=HbnpUm9FJw38sufL-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=1596%3A2504&page-id=156%3A369" target="_blank" rel="noopener">互動原型</a>
+          <a class="btn btn--ghost" href="https://yeeeeefang.github.io/rightcode/" target="_blank" rel="noopener">開啟網站</a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ─────────── 01 起心動念 ─────────── -->
+    <section class="stage" id="s01">
+      <div class="container">
+        <header class="stage__head">
+          <p class="stage__num">01</p>
+          <h2 class="stage__title">起心動念</h2>
+        </header>
+
+        <div class="prose">
+          <p>程式語言納入 108 課綱、2030 雙語政策上路，孩子被要求同時學會兩件事，但市面上的資源沒有跟上。</p>
+        </div>
+
+        <ul class="stat-row">
+          <li class="stat"><p class="stat__num">29%</p><p class="stat__label">孩子覺得程式「太複雜」</p></li>
+          <li class="stat"><p class="stat__num">26.3%</p><p class="stat__label">對程式沒有興趣</p></li>
+          <li class="stat"><p class="stat__num">45%</p><p class="stat__label">家長認為現有平台內容枯燥</p></li>
+        </ul>
+
+        <blockquote class="pull-quote">
+          問題不是孩子學不會，而是他們不知道從哪裡開始。
+        </blockquote>
+      </div>
+    </section>
+
+
+    <!-- ─────────── 02 使用者研究 ─────────── -->
+    <section class="stage" id="s02">
+      <div class="container">
+        <header class="stage__head">
+          <p class="stage__num">02</p>
+          <h2 class="stage__title">使用者研究</h2>
+          <p class="stage__lead">244 份問卷，對象涵蓋國小、國中、高中生與家長。</p>
+        </header>
+
+        <div class="grid grid--2">
+          <figure class="figure">
+            <div class="ph ph--16x9" data-ph="學生問卷　assets/rightcode/survey-students.png">
+            <img src="assets/rightcode/survey-students.png" alt="學生問卷結果" loading="lazy">
+          </div>
+            <figcaption>學生：47% 偏好小遊戲闖關、34% 玩動作類遊戲</figcaption>
+          </figure>
+          <figure class="figure">
+            <div class="ph ph--16x9" data-ph="家長問卷　assets/rightcode/survey-parents.png">
+            <img src="assets/rightcode/survey-parents.png" alt="家長問卷結果" loading="lazy">
+          </div>
+            <figcaption>家長：70% 要實際操作、65% 接受遊戲化、40% 每次一小時</figcaption>
+          </figure>
+        </div>
+
+        <figure class="figure figure--wide">
+          <div class="ph ph--16x9" data-ph="同理心地圖　assets/rightcode/empathy-map.png">
+            <img src="assets/rightcode/empathy-map.png" alt="同理心地圖" loading="lazy">
+          </div>
+          <figcaption>把問卷的開放題整理成同理心地圖，孩子與家長的說法放在同一張紙上比對。</figcaption>
+        </figure>
+
+        <div class="grid grid--2">
+          <div class="persona">
+            <div class="ph ph--1x1 persona__avatar" data-ph="林美美">
+            <img src="assets/rightcode/persona-1.png" alt="人物誌：林美美" loading="lazy">
+          </div>
+            <div class="persona__body">
+              <h3 class="persona__name">林美美</h3>
+              <p class="persona__role">10 歲，國小生</p>
+              <ul class="persona__points">
+                <li>對程式充滿熱情，但自學時感到困惑</li>
+                <li>喜歡動作與角色扮演遊戲</li>
+                <li>希望學習像玩遊戲一樣輕鬆</li>
+                <li>想學會自己做一個網頁</li>
+              </ul>
+            </div>
+          </div>
+          <div class="persona">
+            <div class="ph ph--1x1 persona__avatar" data-ph="顏小明">
+            <img src="assets/rightcode/persona-2.png" alt="人物誌：顏小明" loading="lazy">
+          </div>
+            <div class="persona__body">
+              <h3 class="persona__name">顏小明</h3>
+              <p class="persona__role">37 歲，8 歲孩子的家長</p>
+              <ul class="persona__points">
+                <li>希望孩子培養邏輯與創意思維</li>
+                <li>課程不能枯燥，要能快樂學習</li>
+                <li>需要進度追蹤與獎勵機制</li>
+                <li>預算：免費或每月 500 元內</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ─────────── 03 從限制找機會 ─────────── -->
+    <section class="stage" id="s03">
+      <div class="container">
+        <header class="stage__head">
+          <p class="stage__num">03</p>
+          <h2 class="stage__title">從限制裡找機會</h2>
+          <p class="stage__lead">現有平台不是不夠多，是沒有一個同時處理「中文介面」與「玩得下去」。</p>
+        </header>
+
+        <figure class="figure figure--wide">
+          <div class="ph ph--16x9" data-ph="SWOT 分析　assets/rightcode/swot.png">
+            <img src="assets/rightcode/swot.png" alt="SWOT 分析" loading="lazy">
+          </div>
+        </figure>
+
+        <ol class="pillars">
+          <li class="pillar">
+            <p class="pillar__num">A</p>
+            <h3 class="pillar__title">故事啟發，提問思考</h3>
+            <p>用生活比喻帶出標籤概念——粗的像電線杆、斜的像溜滑梯，先有畫面再有語法。</p>
+          </li>
+          <li class="pillar">
+            <p class="pillar__num">B</p>
+            <h3 class="pillar__title">課後遊戲，小試身手</h3>
+            <p>每個單元收在一題選擇題，答錯不扣分，只給回饋，降低出手的門檻。</p>
+          </li>
+          <li class="pillar">
+            <p class="pillar__num">C</p>
+            <h3 class="pillar__title">IP 設計，學習不無趣</h3>
+            <p>四隻角色貫穿全站，把冒險地圖變成孩子看得懂的學習進度。</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+
+    <!-- ─────────── 04 資訊架構取捨 ─────────── -->
+    <section class="stage" id="s04">
+      <div class="container">
+        <header class="stage__head">
+          <p class="stage__num">04</p>
+          <h2 class="stage__title">資訊架構：砍掉一半</h2>
+          <p class="stage__lead">初版塞了論壇與職業介紹，但那是給大人看的。定版只留孩子會用到的三條主線。</p>
+        </header>
+
+        <div class="compare">
+          <figure class="figure">
+            <div class="ph ph--16x9" data-ph="架構初版　assets/rightcode/sitemap-v1.png">
+            <img src="assets/rightcode/sitemap-v1.png" alt="網站架構圖初版" loading="lazy">
+          </div>
+            <figcaption><span class="figcap__tag">初版</span>5 個主分類、含論壇與職業介紹</figcaption>
+          </figure>
+          <figure class="figure">
+            <div class="ph ph--16x9" data-ph="架構定版　assets/rightcode/sitemap-v2.png">
+            <img src="assets/rightcode/sitemap-v2.png" alt="網站架構圖定版" loading="lazy">
+          </div>
+            <figcaption><span class="figcap__tag figcap__tag--on">定版</span>3 個主分類，砍掉 JavaScript 與點數存摺</figcaption>
+          </figure>
+        </div>
+
+        <div class="prose">
+          <!-- ✏️ 這段最值錢：寫清楚「為什麼砍」。
+               例：JavaScript 對國小生太陡，先把 HTML/CSS 的成就感做滿。 -->
+          <p>（寫下你們為什麼做這個取捨——面試官會追問的就是這一段。）</p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ─────────── 05 線框稿與視覺系統 ─────────── -->
+    <section class="stage" id="s05">
+      <div class="container">
+        <header class="stage__head">
+          <p class="stage__num">05</p>
+          <h2 class="stage__title">線框稿與視覺系統</h2>
+        </header>
+
+        <figure class="figure figure--wide">
+          <div class="ph ph--16x9" data-ph="Wireframe 全頁　assets/rightcode/wireframe.png">
+            <img src="assets/rightcode/wireframe.png" alt="RightCode 線框稿" loading="lazy">
+          </div>
+        </figure>
+
+        <div class="grid grid--2">
+          <figure class="figure">
+            <div class="ph ph--16x9" data-ph="色票　assets/rightcode/colors.png">
+            <img src="assets/rightcode/colors.png" alt="色彩系統" loading="lazy">
+          </div>
+            <figcaption>高彩度主色配上白色描邊，確保在黃底上仍有足夠對比。</figcaption>
+          </figure>
+          <figure class="figure">
+            <div class="ph ph--16x9" data-ph="字體　assets/rightcode/type.png">
+            <img src="assets/rightcode/type.png" alt="字體系統：獅尾圓體" loading="lazy">
+          </div>
+            <figcaption>獅尾圓體 Swei Gothic CJK TC，圓角筆畫對孩子更友善。</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ─────────── 06 首頁四次改版（本頁高潮）─────────── -->
+    <section class="stage" id="s06">
+      <div class="container">
+        <header class="stage__head">
+          <p class="stage__num">06</p>
+          <h2 class="stage__title">首頁的四次改版</h2>
+          <p class="stage__lead">從線框稿到上線，首頁一共重畫四次。每一次都在解一個具體的問題。</p>
+        </header>
+
+        <ol class="iteration">
+          <li class="iteration__step">
+            <div class="ph ph--shot" data-ph="v1　iter-1.png">
+            <img src="assets/rightcode/iter-1.png" alt="首頁版本一" loading="lazy">
+          </div>
+            <p class="iteration__label">v1</p>
+            <p class="iteration__note">區塊排好，但每一段長得一樣，孩子不知道要往哪看。</p>
+          </li>
+          <li class="iteration__step">
+            <div class="ph ph--shot" data-ph="v2　iter-2.png">
+            <img src="assets/rightcode/iter-2.png" alt="首頁版本二" loading="lazy">
+          </div>
+            <p class="iteration__label">v2</p>
+            <p class="iteration__note">導入冒險路徑串起內容，但折線太銳利，跟角色的圓潤感打架。</p>
+          </li>
+          <li class="iteration__step">
+            <div class="ph ph--shot" data-ph="v3　iter-3.png">
+            <img src="assets/rightcode/iter-3.png" alt="首頁版本三" loading="lazy">
+          </div>
+            <p class="iteration__label">v3</p>
+            <p class="iteration__note">路徑改成曲線並補上中英雙語標題，資訊密度仍偏高。</p>
+          </li>
+          <li class="iteration__step">
+            <div class="ph ph--shot" data-ph="v4 定版　iter-4.png">
+            <img src="assets/rightcode/iter-4.png" alt="首頁定版" loading="lazy">
+          </div>
+            <p class="iteration__label">v4 · 定版</p>
+            <p class="iteration__note">拉大留白、統一為一條主動線，Start Now 成為畫面唯一終點。</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+
+    <!-- ─────────── 07 最終介面 ─────────── -->
+    <section class="stage" id="s07">
+      <div class="container">
+        <header class="stage__head">
+          <p class="stage__num">07</p>
+          <h2 class="stage__title">最終介面</h2>
+        </header>
+
+        <div class="gallery">
+          <figure class="figure gallery__item gallery__item--wide">
+            <div class="ph ph--16x9" data-ph="學習區　assets/rightcode/ui-learn.png">
+            <img src="assets/rightcode/ui-learn.png" alt="學習區介面" loading="lazy">
+          </div>
+            <figcaption>學習區：課程、小試身手、學習趨勢三個入口</figcaption>
+          </figure>
+          <figure class="figure gallery__item">
+            <div class="ph ph--16x9" data-ph="課程頁　ui-course.png">
+            <img src="assets/rightcode/ui-course.png" alt="課程內頁" loading="lazy">
+          </div>
+            <figcaption>課程頁：故事 → 提問 → 語法</figcaption>
+          </figure>
+          <figure class="figure gallery__item">
+            <div class="ph ph--16x9" data-ph="小試身手　ui-quiz.png">
+            <img src="assets/rightcode/ui-quiz.png" alt="小試身手測驗頁" loading="lazy">
+          </div>
+            <figcaption>小試身手：答錯只給提示，不給挫折</figcaption>
+          </figure>
+          <figure class="figure gallery__item">
+            <div class="ph ph--16x9" data-ph="會員中心　ui-member.png">
+            <img src="assets/rightcode/ui-member.png" alt="會員中心" loading="lazy">
+          </div>
+            <figcaption>會員中心：徽章化的進度追蹤</figcaption>
+          </figure>
+          <figure class="figure gallery__item">
+            <div class="ph ph--16x9" data-ph="登入註冊　ui-login.png">
+            <img src="assets/rightcode/ui-login.png" alt="登入與註冊頁" loading="lazy">
+          </div>
+            <figcaption>登入／註冊</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ─────────── 08 反思 ─────────── -->
+    <section class="stage" id="s08">
+      <div class="container">
+        <header class="stage__head">
+          <p class="stage__num">08</p>
+          <h2 class="stage__title">成果與反思</h2>
+        </header>
+
+        <div class="grid grid--2">
+          <div class="prose">
+            <h4>我學到的</h4>
+            <!-- ✏️ 1–2 段。誠實寫，面試官只在意你怎麼想。 -->
+            <p>（1–2 段，誠實寫。）</p>
+          </div>
+          <div class="prose">
+            <h4>如果重來一次</h4>
+            <!-- ✏️ 例：問卷的開放題比例太低，下次會先做 5 場訪談再發問卷。 -->
+            <p>（1–2 段，寫你會怎麼改。）</p>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <a class="btn btn--solid" href="https://www.figma.com/proto/8WWPICzNsTXUxvB6uJl1gG/UI?node-id=1596-2504&viewport=-5785%2C-7744%2C0.22&t=HbnpUm9FJw38sufL-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=1596%3A2504&page-id=156%3A369" target="_blank" rel="noopener">互動原型</a>
+          <a class="btn btn--ghost" href="https://yeeeeefang.github.io/rightcode/" target="_blank" rel="noopener">開啟網站</a>
+        </div>
+      </div>
+    </section>
+
+  </article>
+
+
+  <!-- ═══ 下一個專案 ═══ -->
+  <nav class="page-nav" aria-label="專案導覽">
+    <div class="container page-nav__inner">
+      <a class="back-link" href="index.html">
+        <span class="back-link__arrow" aria-hidden="true">←</span>
+        <span>回到首頁</span>
+      </a>
+      <a class="page-nav__next" href="project-virtuosi.html">下一個案例：Virtuosi</a>
+    </div>
+  </nav>
+
+</main>
+
+
+<footer class="site-foot">
+  <div class="container site-foot__inner">
+    <p>© 2026 Oakley</p>
+    <p>Designed &amp; built by me</p>
+    <a class="to-top" href="#top">回到頂端 ↑</a>
+  </div>
+</footer>
+
+<script src="main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Virtuosi — Oakley</title>
+<meta name="description" content="世界名畫收藏 App 的畫面思考過程與資訊層級：七個畫面、一個拱形母題。">
+
+<meta property="og:title" content="Virtuosi — Case Study">
+<meta property="og:description" content="從功能地圖到七個畫面，一層層決定誰先被看見。">
+<meta property="og:image" content="assets/virtuosi/hero.png">
+<meta property="og:type" content="article">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700&family=Schibsted+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<!-- data-project 只影響左側進度軌的顏色，識別色仍是柿橘 -->
+<body id="top" data-project="virtuosi">
+
+<a class="skip-link" href="#main">跳到主要內容</a>
+
+<div class="rail" aria-hidden="true"><span class="rail__fill"></span></div>
+
+
+<!-- ═══ 導覽列：← 回到首頁 ═══ -->
+<header class="site-head">
+  <div class="site-head__inner container">
+    <a class="back-link" href="index.html">
+      <span class="back-link__arrow" aria-hidden="true">←</span>
+      <span>回到首頁</span>
+    </a>
+    <p class="head-tail">Case 02 · Virtuosi</p>
+  </div>
+</header>
+
+
+<main id="main">
+
+  <article class="case">
+
+    <!-- ═══ 專案頁首（含事實欄）═══ -->
+    <header class="page-hero">
+      <div class="container">
+        <p class="eyebrow">Case 02 — 世界名畫收藏 App</p>
+        <h1 class="page-hero__title">Virtuosi</h1>
+        <p class="page-hero__tagline">Timeless Art, Eternal Stories.</p>
+
+        <div class="ph ph--16x9 page-hero__cover" data-ph="主視覺　assets/virtuosi/hero.png">
+          <img src="assets/virtuosi/hero.png" alt="Virtuosi 主視覺：達文西肖像與 App 畫面">
+        </div>
+
+        <dl class="factbar">
+          <div class="factbar__item">
+            <dt>我的角色</dt>
+            <dd><!-- ✏️ -->UI/UX 設計（個人專案）</dd>
+          </div>
+          <div class="factbar__item">
+            <dt>類型</dt>
+            <dd>iOS App 概念設計</dd>
+          </div>
+          <div class="factbar__item">
+            <dt>產出</dt>
+            <dd>Function map · Wireframe · 7 個畫面 · Prototype</dd>
+          </div>
+          <div class="factbar__item">
+            <dt>工具</dt>
+            <dd>Figma</dd>
+          </div>
+        </dl>
+
+        <div class="btn-row">
+          <a class="btn btn--solid" href="https://www.figma.com/proto/xwzAvLO0u9F9jetTHmLRYP/%E4%B8%96%E7%95%8C%E5%90%8D%E7%95%AB%E6%94%B6%E8%97%8FApp?node-id=507-1421&starting-point-node-id=507%3A1421&page-id=&t=ETVsnx2MWSgcrkkp-1" target="_blank" rel="noopener">操作原型</a>
+        </div>
+      </div>
+    </header>
+
+
+    <!-- ─────────── 00 概念 ─────────── -->
+    <section class="stage" id="s00">
+      <div class="container">
+        <header class="stage__head">
+          <p class="stage__num">00</p>
+          <h2 class="stage__title">一個簡單易用的名畫入口</h2>
+        </header>
+
+        <div class="prose">
+          <p>看名畫的 App 通常長成兩種：資料庫式的清單，或是美術館官方的導覽。前者沒有情緒，後者資訊太重。Virtuosi 想找中間值——先被畫吸引，再願意讀下去。</p>
+        </div>
+
+        <ul class="feature-row">
+          <li class="feature">
+            <h3>畫作即介面</h3>
+            <p>作者頁與畫作頁都以整幅畫當背景，色塊與留白全部退到後面。</p>
+          </li>
+          <li class="feature">
+            <h3>故事分層釋出</h3>
+            <p>生卒年 → 傳記摘要 → 代表作，一次只給一層，不把生平一口氣倒完。</p>
+          </li>
+          <li class="feature">
+            <h3>收藏依作者聚合</h3>
+            <p>收藏頁用作者分組、A~Z 排序，收藏久了自然長成一份自己的美術史。</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+
+    <!-- ─────────── 01 功能地圖 ─────────── -->
+    <section class="stage" id="s01">
+      <div class="container">
+        <header class="stage__head">
+          <p class="stage__num">01</p>
+          <h2 class="stage__title">功能地圖</h2>
+          <p class="stage__lead">登入後進入首頁，底部四個分頁（Home / Artist / Saved / You）並行；主動線是 Artwork → Detail，Search 掛在 Home 之下。</p>
+        </header>
+
+        <figure class="figure figure--wide">
+          <div class="ph ph--16x9" data-ph="Function map　assets/virtuosi/function-map.png">
+            <img src="assets/virtuosi/function-map.png" alt="Virtuosi 功能地圖" loading="lazy">
+          </div>
+          <figcaption>四個分頁是並行的入口，不是巢狀階層——所以每個畫面都保留底部分頁列，隨時可以跳出當前的閱讀。</figcaption>
+        </figure>
+      </div>
+    </section>
+
+
+    <!-- ─────────── 02 線框到介面 ─────────── -->
+    <section class="stage" id="s02">
+      <div class="container">
+        <header class="stage__head">
+          <p class="stage__num">02</p>
+          <h2 class="stage__title">從線框稿到介面</h2>
+          <p class="stage__lead">線框階段就先定好每頁的閱讀順序，視覺只負責放大這個順序。</p>
+        </header>
+
+        <figure class="figure figure--wide">
+          <div class="ph ph--16x9" data-ph="Wireframe 全頁　assets/virtuosi/wireframe.png">
+            <img src="assets/virtuosi/wireframe.png" alt="Virtuosi 線框稿" loading="lazy">
+          </div>
+          <figcaption><!-- ✏️ 可補一句：哪一頁的順序在線框階段就改過，為什麼。 -->線框稿與最終介面的對照。</figcaption>
+        </figure>
+      </div>
+    </section>
+
+
+    <!--
+      ─────────── 03 畫面的思考過程（本頁核心）───────────
+      七個畫面依實際流程排序，左右交替。
+      每一組：左（或右）放畫面，另一側用編號說明「為什麼這樣排」。
+    -->
+    <section class="stage" id="s03">
+      <div class="container">
+        <header class="stage__head">
+          <p class="stage__num">03</p>
+          <h2 class="stage__title">畫面的思考過程</h2>
+          <p class="stage__lead">七個畫面，依實際流程逐一拆解我怎麼決定「誰先被看見」。</p>
+        </header>
+
+        <div class="prose">
+          <p><strong>貫穿全站的形狀是「拱」。</strong>登入卡、首頁的本週精選、畫作頁的說明卡、會員頁的主視覺，全都是拱形——那是美術館的拱窗與畫框輪廓。它讓七個畫面即使內容差很多，仍然像同一個空間裡的東西。</p>
+        </div>
+
+        <!-- 1. Login -->
+        <div class="anno">
+          <div class="anno__media">
+            <div class="ph ph--phone" data-ph="Login　screen-login.png">
+              <img src="assets/virtuosi/screen-login.png" alt="Virtuosi 登入頁" loading="lazy">
+            </div>
+          </div>
+          <div class="anno__body">
+            <h3 class="anno__title">Login — 先立調性，再要帳號</h3>
+            <ol class="anno__list">
+              <li><span class="anno__n">1</span><div><strong>字標壓在天使圖上</strong>：進 App 第一眼是一幅畫，不是輸入框。先確立「這是關於古典藝術的地方」。</div></li>
+              <li><span class="anno__n">2</span><div><strong>拱形毛玻璃卡</strong>：表單浮在畫上而不是蓋掉畫，磨砂讓背景的雲和天使仍然透出來。</div></li>
+              <li><span class="anno__n">3</span><div><strong>Timeless Art, Eternal Stories</strong>：標語放在最下方，是離開這頁前的最後一句話。</div></li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- 2. Home -->
+        <div class="anno anno--reverse">
+          <div class="anno__media">
+            <div class="ph ph--phone" data-ph="Home　screen-home.png">
+              <img src="assets/virtuosi/screen-home.png" alt="Virtuosi 首頁" loading="lazy">
+            </div>
+          </div>
+          <div class="anno__body">
+            <h3 class="anno__title">Home — 先給情緒，再給分類</h3>
+            <ol class="anno__list">
+              <li><span class="anno__n">1</span><div><strong>問候與頭像</strong>：Good Morning, Charlotte——個人化的入口，點擊直達會員頁。</div></li>
+              <li><span class="anno__n">2</span><div><strong>Weekly Trends 拱形主圖</strong>：整頁最大的視覺量體，光芒線與星芒把視線收束到畫上，先讓人被畫勾住。</div></li>
+              <li><span class="anno__n">3</span><div><strong>Period 分類在下方</strong>：Renaissance 14~16th 這類知識性內容放在「感受」之後，不搶第一眼。</div></li>
+              <li><span class="anno__n">4</span><div><strong>底部四分頁常駐</strong>：Home / Artist / Saved / You 一直在，任何深度都能一步跳出。</div></li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- 3. Artist 列表 -->
+        <div class="anno">
+          <div class="anno__media">
+            <div class="ph ph--phone" data-ph="Artist 列表　screen-artist.png">
+              <img src="assets/virtuosi/screen-artist.png" alt="Virtuosi 作者列表頁" loading="lazy">
+            </div>
+          </div>
+          <div class="anno__body">
+            <h3 class="anno__title">Artist — 用人臉當索引</h3>
+            <ol class="anno__list">
+              <li><span class="anno__n">1</span><div><strong>Period 篩選 + Search 並列</strong>：一個給「不知道要找誰」的人瀏覽，一個給「已經知道」的人直達。</div></li>
+              <li><span class="anno__n">2</span><div><strong>圓形頭像雙欄網格</strong>：人臉比名字好記；圓形也讓不同尺寸、不同構圖的肖像畫被統一成同一種節奏。</div></li>
+              <li><span class="anno__n">3</span><div><strong>時期名用手寫體</strong>：Renaissance 以花體呈現，和下方的作者名（襯線）拉開層級，一眼知道那是分組標題不是人名。</div></li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- 4. Artist Detail -->
+        <div class="anno anno--reverse">
+          <div class="anno__media">
+            <div class="ph ph--phone" data-ph="Artist 內頁　screen-artist-detail.png">
+              <img src="assets/virtuosi/screen-artist-detail.png" alt="Virtuosi 作者內頁：達文西" loading="lazy">
+            </div>
+          </div>
+          <div class="anno__body">
+            <h3 class="anno__title">Artist Detail — 讓肖像自己當背景</h3>
+            <ol class="anno__list">
+              <li><span class="anno__n">1</span><div><strong>自畫像滿版當底</strong>：不開獨立的圖片區塊，整頁就是那張臉，文字直接壓在上面。</div></li>
+              <li><span class="anno__n">2</span><div><strong>姓名斷成兩行</strong>：Leonardo / Da Vinci 錯開排列，避開肖像的臉部，讓字和畫不互相干擾。</div></li>
+              <li><span class="anno__n">3</span><div><strong>傳記只給一段就截斷</strong>：以「⋯」收尾，想深入的人才點開，不強迫所有人讀完生平。</div></li>
+              <li><span class="anno__n">4</span><div><strong>Masterpieces 橫向捲動</strong>：代表作以橫列收在底部，看完生平自然接到作品，動線不用回頭。</div></li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- 5. Artwork Detail -->
+        <div class="anno">
+          <div class="anno__media">
+            <div class="ph ph--phone" data-ph="Detail　screen-detail.png">
+              <img src="assets/virtuosi/screen-detail.png" alt="Virtuosi 畫作細節頁：蒙娜麗莎" loading="lazy">
+            </div>
+          </div>
+          <div class="anno__body">
+            <h3 class="anno__title">Artwork Detail — 讓文字浮在畫上面</h3>
+            <ol class="anno__list">
+              <li><span class="anno__n">1</span><div><strong>全幅畫作先行</strong>：進頁第一眼只有畫，沒有任何說明文字擋住。</div></li>
+              <li><span class="anno__n">2</span><div><strong>拱形深色卡上浮</strong>：說明從下方推上來，拱頂剛好落在人物胸口，不遮臉。</div></li>
+              <li><span class="anno__n">3</span><div><strong>作者頭像壓在拱頂</strong>：一個小圓形跨在卡片邊緣，把「這幅畫」和「這個人」縫在一起，也是回到作者頁的入口。</div></li>
+              <li><span class="anno__n">4</span><div><strong>收藏心常駐右上</strong>：讀到任何段落都能立刻收藏，已收藏時填滿為磚紅。</div></li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- 6. Saved -->
+        <div class="anno anno--reverse">
+          <div class="anno__media">
+            <div class="ph ph--phone" data-ph="Saved　screen-saved.png">
+              <img src="assets/virtuosi/screen-saved.png" alt="Virtuosi 收藏頁" loading="lazy">
+            </div>
+          </div>
+          <div class="anno__body">
+            <h3 class="anno__title">Saved — 收藏長成一份美術史</h3>
+            <ol class="anno__list">
+              <li><span class="anno__n">1</span><div><strong>以作者分組</strong>：不是一整片縮圖牆，而是「作者 → 他的作品橫列」。收藏本身就被整理成有結構的知識。</div></li>
+              <li><span class="anno__n">2</span><div><strong>作者列帶生卒年</strong>：頭像旁標 1452~1519，滑過收藏時順便建立時間感。</div></li>
+              <li><span class="anno__n">3</span><div><strong>縮圖形狀交替</strong>：方形、圓形、拱形輪流出現，避免長列表變成單調的格子牆，也呼應全站的拱形母題。</div></li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- 7. Member -->
+        <div class="anno">
+          <div class="anno__media">
+            <div class="ph ph--phone" data-ph="Member　screen-member.png">
+              <img src="assets/virtuosi/screen-member.png" alt="Virtuosi 會員頁" loading="lazy">
+            </div>
+          </div>
+          <div class="anno__body">
+            <h3 class="anno__title">You — 帳號頁也不脫離美術館</h3>
+            <ol class="anno__list">
+              <li><span class="anno__n">1</span><div><strong>拱形主視覺置頂</strong>：帳號設定通常最無趣，這裡仍用一幅畫開場，維持整體調性。</div></li>
+              <li><span class="anno__n">2</span><div><strong>頭像壓在拱形邊緣</strong>：和畫作頁的作者頭像用同一個手法，個人與收藏被放在同一種視覺語言裡。</div></li>
+              <li><span class="anno__n">3</span><div><strong>欄位用膠囊形長條</strong>：圓角呼應拱形，讓表單不像系統預設的方框。</div></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ─────────── 04 設計系統 ─────────── -->
+    <section class="stage" id="s04">
+      <div class="container">
+        <header class="stage__head">
+          <p class="stage__num">04</p>
+          <h2 class="stage__title">設計系統</h2>
+          <p class="stage__lead">色票取自畫布本身的顏料——亞麻、赭土、暗棕。</p>
+        </header>
+
+        <div class="prose">
+          <p>四個字型，一條規則：<strong>名字用有藝術感的襯線，需要細讀的地方換成易讀的無襯線。</strong></p>
+          <p>作者名與時期名是被「觀看」的——它們本身就是視覺元素，裝飾性襯線讓它們看起來像展牆上的標籤。但生平與畫作解說是被「閱讀」的，同一套襯線放到 14px、壓在深色畫面上會直接失守，所以換成無襯線。</p>
+        </div>
+
+        <!-- 規範表直接用 Figma 匯出的原件：四個字型都以本尊呈現，
+             不需要嵌入字型檔，也避開了 Aesthetic Free Trial 的授權限制。 -->
+        <figure class="figure figure--wide">
+          <div class="ph ph--16x9" data-ph="字體與色彩規範　assets/virtuosi/design-system.png">
+            <img src="assets/virtuosi/design-system.png" alt="Virtuosi 設計系統規範：Aesthetic Free Trial（Artist Name 40）、Simonetta（title h2 16）、Josefin Sans（title h1 24）、Segoe UI（content 14），色票 #C6C6B4、#A1A18D、#793F34、#312821" loading="lazy">
+          </div>
+        </figure>
+
+        <!-- 圖片裡的資訊補一份文字版：可選取、可被搜尋，
+             而且寫的是「實際用在哪裡」——這是規範表上沒有的。 -->
+        <h3 class="subhead">四個字型各自的守備範圍</h3>
+        <dl class="fontlist">
+          <div class="fontlist__row">
+            <dt>Aesthetic Free Trial</dt>
+            <dd>專案名稱設計 · 時期名 · 首頁輪播的作者名</dd>
+          </div>
+          <div class="fontlist__row">
+            <dt>Simonetta</dt>
+            <dd>藝術家頁面的藝術家名稱</dd>
+          </div>
+          <div class="fontlist__row">
+            <dt>Josefin Sans</dt>
+            <dd>Bottom bar · 漢堡選單</dd>
+          </div>
+          <div class="fontlist__row">
+            <dt>Segoe UI</dt>
+            <dd>內文解說字</dd>
+          </div>
+        </dl>
+
+        <ul class="swatches">
+          <li class="swatch" style="--sw:#C6C6B4"><span class="swatch__chip"></span><span class="swatch__hex">#C6C6B4</span></li>
+          <li class="swatch" style="--sw:#A1A18D"><span class="swatch__chip"></span><span class="swatch__hex">#A1A18D</span></li>
+          <li class="swatch" style="--sw:#793F34"><span class="swatch__chip"></span><span class="swatch__hex">#793F34</span></li>
+          <li class="swatch" style="--sw:#312821"><span class="swatch__chip"></span><span class="swatch__hex">#312821</span></li>
+        </ul>
+      </div>
+    </section>
+
+
+    <!-- ─────────── 05 互動原型 ─────────── -->
+    <section class="stage" id="s05">
+      <div class="container">
+        <header class="stage__head">
+          <p class="stage__num">05</p>
+          <h2 class="stage__title">互動原型</h2>
+          <p class="stage__lead">把主動線串成可點的流程：登入 → 首頁 → 作者 → 作者內頁 → 畫作細節 → 收藏。</p>
+        </header>
+
+        <div class="prose">
+          <p><!-- ✏️ 補一句：測試時發現哪個轉場卡卡的、你怎麼改。 -->（補一句：測試時發現哪裡卡住、你怎麼改。）</p>
+        </div>
+
+        <!--
+          Figma 官方 embed。刻意不讓 iframe 一進頁就載入——它會把整個
+          Figma 應用拉進來，拖慢頁面又會種第三方 cookie。
+          先顯示靜態封面，使用者點了才換成 iframe。
+        -->
+        <div class="proto"
+             data-proto="https://embed.figma.com/proto/xwzAvLO0u9F9jetTHmLRYP/%E4%B8%96%E7%95%8C%E5%90%8D%E7%95%AB%E6%94%B6%E8%97%8FApp?node-id=507-1421&amp;starting-point-node-id=507%3A1421&amp;embed-host=share&amp;hide-ui=1&amp;hotspot-hints=0"
+             data-proto-title="Virtuosi 互動原型">
+          <button class="proto__launch" type="button">
+            <img class="proto__poster" src="assets/virtuosi/screen-login.png" alt="" aria-hidden="true" loading="lazy">
+            <span class="proto__overlay">
+              <span class="proto__play" aria-hidden="true"></span>
+              <span class="proto__label">載入互動原型</span>
+              <span class="proto__note">會連線到 Figma</span>
+            </span>
+          </button>
+        </div>
+
+        <div class="btn-row">
+          <a class="btn btn--ghost" href="https://www.figma.com/proto/xwzAvLO0u9F9jetTHmLRYP/%E4%B8%96%E7%95%8C%E5%90%8D%E7%95%AB%E6%94%B6%E8%97%8FApp?node-id=507-1421&starting-point-node-id=507%3A1421&page-id=&t=ETVsnx2MWSgcrkkp-1" target="_blank" rel="noopener">在 Figma 開啟全螢幕</a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ─────────── 06 反思 ─────────── -->
+    <section class="stage" id="s06">
+      <div class="container">
+        <header class="stage__head">
+          <p class="stage__num">06</p>
+          <h2 class="stage__title">反思</h2>
+        </header>
+
+        <div class="grid grid--2">
+          <div class="prose">
+            <h4>我學到的</h4>
+            <!-- ✏️ 建議寫：深色介面 + 手寫感字體在小字級的可讀性取捨，你怎麼調整。 -->
+            <p>（1–2 段，誠實寫。）</p>
+          </div>
+          <div class="prose">
+            <h4>如果重來一次</h4>
+            <p>（1–2 段，寫你會怎麼改。）</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </article>
+
+
+  <!-- ═══ 上一個專案 ═══ -->
+  <nav class="page-nav" aria-label="專案導覽">
+    <div class="container page-nav__inner">
+      <a class="back-link" href="index.html">
+        <span class="back-link__arrow" aria-hidden="true">←</span>
+        <span>回到首頁</span>
+      </a>
+      <a class="page-nav__next" href="project-rightcode.html">另一個案例：RightCode</a>
+    </div>
+  </nav>
+
+</main>
+
+
+<footer class="site-foot">
+  <div class="container site-foot__inner">
+    <p>© 2026 Oakley</p>
+    <p>Designed &amp; built by me</p>
+    <a class="to-top" href="#top">回到頂端 ↑</a>
+  </div>
+</footer>
+
+<script src="main.js" defer></script>
+</body>
+</html>
