@@ -911,8 +911,8 @@ figcaption {
   .anno--reverse { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
   .anno--reverse .anno__media { order: 2; }
 }
-.anno__media { max-width: 320px; }
-@media (min-width: 860px) { .anno__media { max-width: 380px; } }
+/* 手機畫面統一 312×675，和 05 的互動原型同尺寸 */
+.anno__media { max-width: 312px; }
 .anno__title { font-size: var(--fs-h4); margin-bottom: var(--sp-3); }
 .anno__list { display: grid; gap: var(--sp-3); }
 .anno__list li {
@@ -977,13 +977,17 @@ figcaption {
 .proto {
   position: relative;
   width: 100%;
-  max-width: 440px;
+  max-width: 312px;
   margin: var(--sp-6) auto 0;
-  /* 實測 460×900 時手機幾乎填滿 Figma 的檢視框，黑邊最少 */
-  aspect-ratio: 1 / 1.96;
-  border-radius: var(--radius-lg);
+  /* 312×675 = iPhone 14（390×844）的等比縮小，比例 0.4621。
+     比例只要差一點，Figma 就會自己套機身外框再用黑底補滿空隙；
+     網址列的 device-frame=0 負責關掉外框，兩者要一起才乾淨。 */
+  aspect-ratio: 312 / 675;
+  /* iPhone 14 螢幕圓角約為寬度的 12% */
+  border-radius: 38px;
   overflow: hidden;
-  background: var(--ink);
+  /* 底色取自登入頁本身的米灰，載入瞬間不會閃黑 */
+  background: #C9C7B6;
 }
 
 .proto iframe {
@@ -1001,14 +1005,16 @@ figcaption {
   cursor: pointer;
   overflow: hidden;
 }
+/* 封面用漸層而不是截圖：截圖含機身外框、匯出範圍也和 prototype
+   的裝置視窗不同（0.478 vs 0.462），一定會有落差。
+   用同色系漸層，尺寸完全由容器決定，載入前後不會跳動。 */
 .proto__poster {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform .7s var(--ease-out), filter .5s var(--ease);
-  filter: saturate(.9) brightness(.86);
+  background:
+    radial-gradient(120% 62% at 50% 106%, #EDEBE3 0%, transparent 62%),
+    linear-gradient(180deg, #CFCDBC 0%, #C9C7B6 46%, #DAD8CC 100%);
+  transition: filter .5s var(--ease);
 }
 .proto__overlay {
   position: absolute;
@@ -1017,14 +1023,14 @@ figcaption {
   place-content: center;
   justify-items: center;
   gap: 6px;
-  color: #fff;
-  text-shadow: 0 1px 12px rgb(0 0 0 / .5);
+  /* 淺色底改用深墨字，不用白字加陰影 */
+  color: #3E3228;
 }
 .proto__play {
   width: 58px; height: 58px;
   border-radius: 50%;
-  border: 1.5px solid rgb(255 255 255 / .85);
-  background: rgb(0 0 0 / .28);
+  border: 1.5px solid rgb(62 50 40 / .35);
+  background: rgb(255 255 255 / .5);
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
   display: grid;
@@ -1037,7 +1043,7 @@ figcaption {
   content: "";
   border-style: solid;
   border-width: 9px 0 9px 14px;
-  border-color: transparent transparent transparent #fff;
+  border-color: transparent transparent transparent #3E3228;
   margin-left: 4px;
 }
 .proto__label { font-size: var(--fs-small); font-weight: 500; }
@@ -1049,8 +1055,8 @@ figcaption {
 }
 
 @media (hover: hover) {
-  .proto__launch:hover .proto__poster { transform: scale(1.04); filter: saturate(1) brightness(.78); }
-  .proto__launch:hover .proto__play { transform: scale(1.08); background: rgb(0 0 0 / .42); }
+  .proto__launch:hover .proto__poster { filter: brightness(.97); }
+  .proto__launch:hover .proto__play { transform: scale(1.08); background: rgb(255 255 255 / .72); }
 }
 .proto__launch:focus-visible { outline: 2px solid var(--accent); outline-offset: -4px; }
 
@@ -1106,7 +1112,10 @@ figcaption {
 
 /* 手機 mockup：760×1559，含機身外框且四周透明。
    比例要用原尺寸，並用 contain，才不會把機身邊緣切掉。 */
-.ph--phone { aspect-ratio: 760 / 1559; }
+/* 312×675（= iPhone 14 的 390×844 等比縮小），與互動原型一致。
+   截圖含機身外框、原始比例是 760×1559，所以用 contain 置中，
+   不裁掉機身；上下多出來的空隙是頁面底色，看不出來。 */
+.ph--phone { aspect-ratio: 312 / 675; }
 /* 提高一級：.ph > img 的 cover 定義在後面，同權重會蓋掉這裡 */
 .ph.ph--phone > img { object-fit: contain; }
 
