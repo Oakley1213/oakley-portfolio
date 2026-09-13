@@ -911,7 +911,7 @@ figcaption {
   .anno--reverse { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
   .anno--reverse .anno__media { order: 2; }
 }
-/* 手機畫面統一 312×675，和 05 的互動原型同尺寸 */
+/* 手機畫面統一 312×675（靜態截圖與 .device 影片元件都是這個盒） */
 .anno__media { max-width: 312px; }
 .anno__title { font-size: var(--fs-h4); margin-bottom: var(--sp-3); }
 .anno__list { display: grid; gap: var(--sp-3); }
@@ -973,92 +973,77 @@ figcaption {
 }
 
 
-/* ---- 互動原型（Figma embed，點擊才載入）-------------------- */
-.proto {
+/* ---- 手機示範影片（影片 + 透明機身外框 PNG 疊層）--------------
+   三層：.device（尺寸／定位／RWD）
+         .device__screen（絕對定位在螢幕開口，負責圓角裁切）
+         .device__frame（透明外框 PNG，永遠壓在影片上方）
+
+   校準數值全部集中在 .device 的 custom properties，單位是外框
+   PNG 的原始像素（760×1559）。要微調螢幕位置，只改這裡。
+   量法：外框 PNG 透明區域的直邊在 x=34 / 725、y=30 / 1529，
+   四角弧線以半徑 94px 擬合；Dynamic Island 是 PNG 裡不透明的
+   一塊（220×65，距螢幕上緣 19px），所以外框層自然會把它蓋在
+   影片上，不需要另外處理。 */
+.device {
+  --frame-w: 760;          /* 外框 PNG 寬（px） */
+  --frame-h: 1559;         /* 外框 PNG 高（px） */
+  --screen-top: 30;        /* 螢幕開口距外框上緣 */
+  --screen-right: 35;      /* 距右緣 */
+  --screen-bottom: 30;     /* 距下緣 */
+  --screen-left: 34;       /* 距左緣 */
+  --screen-radius: 94;     /* 螢幕圓角半徑 */
+  --screen-bg: #C9C7B6;    /* 影片載入前的底色：取自登入頁的米灰 */
+
   position: relative;
   width: 100%;
-  max-width: 312px;
-  margin: var(--sp-6) auto 0;
-  /* 312×675 = iPhone 14（390×844）的等比縮小，比例 0.4621。
-     比例只要差一點，Figma 就會自己套機身外框再用黑底補滿空隙；
-     網址列的 device-frame=0 負責關掉外框，兩者要一起才乾淨。 */
-  aspect-ratio: 312 / 675;
-  /* iPhone 14 螢幕圓角約為寬度的 12% */
-  border-radius: 38px;
-  overflow: hidden;
-  /* 底色取自登入頁本身的米灰，載入瞬間不會閃黑 */
-  background: #C9C7B6;
+  aspect-ratio: var(--frame-w) / var(--frame-h);
+  /* 讓圓角可以用 cqw 跟著元件寬度等比縮放 */
+  container-type: inline-size;
 }
 
-.proto iframe {
+.device__screen {
+  position: absolute;
+  top:    calc(var(--screen-top)    / var(--frame-h) * 100%);
+  right:  calc(var(--screen-right)  / var(--frame-w) * 100%);
+  bottom: calc(var(--screen-bottom) / var(--frame-h) * 100%);
+  left:   calc(var(--screen-left)   / var(--frame-w) * 100%);
+  --_r: calc(var(--screen-radius) / var(--frame-w) * 100cqw);
+  border-radius: var(--_r);
+  /* overflow + clip-path 兩道都做：Safari 硬體解碼的 <video>
+     偶爾不吃 overflow:hidden 的圓角，clip-path 保證切得乾淨 */
+  overflow: hidden;
+  clip-path: inset(0 round var(--_r));
+  background: var(--screen-bg);
+  z-index: 1;
+}
+/* 不支援 container query 的舊瀏覽器：用最大顯示寬度（312px）換算 */
+@supports not (container-type: inline-size) {
+  .device__screen { --_r: calc(var(--screen-radius) / var(--frame-w) * 312px); }
+}
+
+.device__video {
   display: block;
   width: 100%;
   height: 100%;
-  border: 0;
+  object-fit: cover;
 }
 
-.proto__launch {
+.device__frame {
   position: absolute;
   inset: 0;
-  padding: 0;
-  display: block;
-  cursor: pointer;
-  overflow: hidden;
-}
-/* 封面用漸層而不是截圖：截圖含機身外框、匯出範圍也和 prototype
-   的裝置視窗不同（0.478 vs 0.462），一定會有落差。
-   用同色系漸層，尺寸完全由容器決定，載入前後不會跳動。 */
-.proto__poster {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(120% 62% at 50% 106%, #EDEBE3 0%, transparent 62%),
-    linear-gradient(180deg, #CFCDBC 0%, #C9C7B6 46%, #DAD8CC 100%);
-  transition: filter .5s var(--ease);
-}
-.proto__overlay {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-content: center;
-  justify-items: center;
-  gap: 6px;
-  /* 淺色底改用深墨字，不用白字加陰影 */
-  color: #3E3228;
-}
-.proto__play {
-  width: 58px; height: 58px;
-  border-radius: 50%;
-  border: 1.5px solid rgb(62 50 40 / .35);
-  background: rgb(255 255 255 / .5);
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
-  display: grid;
-  place-items: center;
-  margin-bottom: var(--sp-1);
-  transition: transform .45s var(--ease-out), background .45s var(--ease);
-}
-/* 用 CSS 畫三角形，不依賴字型或圖檔 */
-.proto__play::after {
-  content: "";
-  border-style: solid;
-  border-width: 9px 0 9px 14px;
-  border-color: transparent transparent transparent #3E3228;
-  margin-left: 4px;
-}
-.proto__label { font-size: var(--fs-small); font-weight: 500; }
-.proto__note {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: .08em;
-  opacity: .8;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
 }
 
-@media (hover: hover) {
-  .proto__launch:hover .proto__poster { filter: brightness(.97); }
-  .proto__launch:hover .proto__play { transform: scale(1.08); background: rgb(255 255 255 / .72); }
+/* 放在 .anno__media 裡時，維持原本靜態截圖的 312×675 外框盒：
+   舊截圖是 760×1559 用 contain 置中在 312/675 的盒子裡，
+   上下各留 (675/312 − 1559/760)/2 ≈ 5.6% 的空隙。
+   用同樣的上下邊距，元件的視覺尺寸與位置就和原本完全一致。 */
+.anno__media .device {
+  margin-block: calc((675 / 312 - var(--frame-h) / var(--frame-w)) / 2 * 100%);
 }
-.proto__launch:focus-visible { outline: 2px solid var(--accent); outline-offset: -4px; }
 
 /* 字型清單：規範圖的文字版，補上「實際用在哪裡」 */
 .fontlist {

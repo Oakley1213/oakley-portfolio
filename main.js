@@ -105,30 +105,70 @@ window.addEventListener('error', (e) => {
 })();
 
 
-/* ---------- 4.5 互動原型：點擊才載入 -------------------------
-   Figma embed 很重（等於載入整個 Figma 應用），一進頁就掛 iframe
-   會拖慢整頁，也會替所有訪客種第三方 cookie。
-   所以先放靜態封面，使用者點了才換成真的 iframe。
+/* ---------- 4.5 手機示範影片：進入視野才播放 -------------------
+   HTML 裡刻意不寫 autoplay——寫了六支影片會在載入時一起開跑。
+   改由 IntersectionObserver 決定：
+   - 影片本身 ≥ 50% 進入可視範圍才播放，離開就暫停。
+   - 同時有多支達標時，只播放露出比例最高的那一支。
+   - play() 被瀏覽器擋下（低耗電模式等）時靜靜吞掉，版面不受影響。
+   - prefers-reduced-motion 時完全不自動播放，只停在第一幀。
    ------------------------------------------------------------ */
-(function protoEmbed() {
-  document.querySelectorAll('.proto').forEach((box) => {
-    const btn = box.querySelector('.proto__launch');
-    const src = box.dataset.proto;
-    if (!btn || !src) return;
+(function deviceVideos() {
+  const videos = [...document.querySelectorAll('.device__video')];
+  if (!videos.length) return;
 
-    btn.addEventListener('click', () => {
-      const frame = document.createElement('iframe');
-      frame.src = src;
-      frame.title = box.dataset.protoTitle || '互動原型';
-      frame.loading = 'lazy';
-      frame.allowFullscreen = true;
-      // 只給它需要的權限
-      frame.setAttribute('allow', 'fullscreen');
-      frame.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
-      box.replaceChildren(frame);
-      frame.focus({ preventScroll: true });
-    }, { once: true });
-  });
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  // 自動播放政策要求靜音；屬性之外再用 JS 設一次，保險
+  videos.forEach((v) => { v.muted = true; v.defaultMuted = true; });
+
+  /* preload="metadata" 不保證畫出第一幀（Chrome 常是一片底色）。
+     往前 seek 一點點會強迫解碼一幀，暫停狀態就有畫面可看。 */
+  const showFirstFrame = (v) => {
+    const nudge = () => { if (v.currentTime === 0) { try { v.currentTime = 0.001; } catch (_) { /* ignore */ } } };
+    if (v.readyState >= 1) nudge();
+    else v.addEventListener('loadedmetadata', nudge, { once: true });
+  };
+
+  const safePlay = (v) => {
+    const p = v.play();
+    if (p && typeof p.catch === 'function') p.catch(() => {});
+  };
+
+  const ratios = new Map();
+
+  const sync = () => {
+    let best = null;
+    let bestRatio = 0;
+    ratios.forEach((r, v) => {
+      if (r >= 0.5 && r > bestRatio) { best = v; bestRatio = r; }
+    });
+    const allowed = best && !reduce.matches && !document.hidden;
+
+    videos.forEach((v) => {
+      if (v !== best || !allowed) { if (!v.paused) v.pause(); }
+    });
+    if (allowed) safePlay(best);
+  };
+
+  if (!('IntersectionObserver' in window)) {
+    videos.forEach(showFirstFrame);
+    return;
+  }
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      ratios.set(entry.target, entry.isIntersecting ? entry.intersectionRatio : 0);
+      if (entry.isIntersecting) showFirstFrame(entry.target);
+    });
+    sync();
+  }, { threshold: [0, 0.5, 0.75, 1] });
+
+  videos.forEach((v) => io.observe(v));
+
+  // 切到背景分頁就暫停，回來再續播；使用者中途改動作偏好也照辦
+  document.addEventListener('visibilitychange', sync);
+  if (typeof reduce.addEventListener === 'function') reduce.addEventListener('change', sync);
 })();
 
 
