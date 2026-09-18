@@ -293,7 +293,7 @@ h1, h2, h3, h4 {
 .hero__title {
   font-size: var(--fs-display);
   margin-top: var(--sp-3);
-  max-width: 16ch;
+  max-width: max-content;
   letter-spacing: -0.035em;
   position: relative;
   z-index: 0;
@@ -393,8 +393,28 @@ h1, h2, h3, h4 {
 .section__head { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
 .section__title { font-size: var(--fs-h2); margin-top: var(--sp-2); }
 
+/* 首頁錨點跳轉（#work、#about）：
+   html 已有全站 scroll-padding-top: head-h + sp-2（84px），
+   這裡的 scroll-margin-top 會與其相加，
+   最終落點 = head-h + sp-2 + 1rem ≈ 導覽列下方 32px。
+   錨點直接設在標題容器上，不再是留白很大的外層 section，
+   所以捲動落點不會被 section 自己的 padding-top 往下推。 */
+#work,
+#about {
+  scroll-margin-top: 1rem;
+}
+
 
 /* ---------- 8. 首頁：大型專案預覽卡片 ------------------------ */
+/* 只在首頁的 .work 覆寫 padding-top，不動全站共用的 .section 規則，
+   避免影響 RightCode / Virtuosi 專案頁。padding-bottom 沿用 --section-y。 */
+.work {
+  padding-top: clamp(4.5rem, 8vw, 5.5rem); /* 桌面 ≈72–88px */
+}
+@media (max-width: 700px) {
+  .work { padding-top: clamp(3rem, 10vw, 4rem); } /* 手機 ≈48–64px */
+}
+
 .work__list { display: grid; gap: clamp(3.5rem, 8vw, 7rem); }
 
 .pcard { position: relative; }
@@ -473,7 +493,7 @@ h1, h2, h3, h4 {
   font-size: var(--fs-small);
   /* 用 em 不用 ch：ch 是「0」的字寬，中文字體下會比預期窄很多，
      44ch 實際只有 24 個中文字，卡片左欄會空一大半。1em ≈ 1 個中文字。 */
-  max-width: 34em;
+  max-width: -webkit-fill-available;
 }
 
 .tag-list {
@@ -563,7 +583,15 @@ h1, h2, h3, h4 {
 
 
 /* ---------- 10. 關於我 --------------------------------------- */
-.about { border-top: 1px solid var(--rule); }
+/* 只在首頁的 .about 覆寫 padding-top，不動全站共用的 .section 規則。
+   padding-bottom 沿用 --section-y，保留區塊呼吸感。 */
+.about {
+  border-top: 1px solid var(--rule);
+  padding-top: clamp(4.5rem, 8vw, 5.5rem); /* 桌面 ≈72–88px */
+}
+@media (max-width: 700px) {
+  .about { padding-top: clamp(3rem, 10vw, 4rem); } /* 手機 ≈48–64px */
+}
 
 .about__grid { display: grid; gap: var(--sp-6); }
 @media (min-width: 860px) {
