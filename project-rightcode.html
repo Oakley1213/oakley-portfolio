@@ -66,18 +66,18 @@
         <dl class="factbar">
           <div class="factbar__item">
             <dt>我的角色</dt>
-            <dd><!-- ✏️ 例：使用者研究 · 視覺設計 · 前端切版 -->視覺設計 · 前端實作</dd>
+            <dd><!-- ✏️ 例：使用者研究 · 視覺設計 · 前端切版 -->UI 視覺設計・介面迭代・部分前端實作</dd>
           </div>
           <div class="factbar__item">
             <dt>時程</dt>
-            <dd>15 週（W2–W15）</dd>
+            <dd>12周</dd>
           </div>
           <div class="factbar__item">
             <dt>團隊</dt>
-            <dd>4 人小組</dd>
+            <dd>4 人跨職能團隊</dd>
           </div>
           <div class="factbar__item">
-            <dt>工具</dt>
+            <dt>工具與技術</dt>
             <dd>Figma · SCSS · JavaScript · React</dd>
           </div>
         </dl>
@@ -99,17 +99,17 @@
         </header>
 
         <div class="prose">
-          <p>程式語言納入 108 課綱、2030 雙語政策上路，孩子被要求同時學會兩件事，但市面上的資源沒有跟上。</p>
+          <p>隨著程式與英語能力逐漸成為兒童學習的重要能力，現有資源仍存在入門門檻高、內容缺乏吸引力等問題。我們因此從學生與家長的需求出發，思考如何打造更容易開始的學習體驗。</p>
         </div>
 
         <ul class="stat-row">
-          <li class="stat"><p class="stat__num">29%</p><p class="stat__label">孩子覺得程式「太複雜」</p></li>
-          <li class="stat"><p class="stat__num">26.3%</p><p class="stat__label">對程式沒有興趣</p></li>
+          <li class="stat"><p class="stat__num">29%</p><p class="stat__label">認為程式內容過於複雜</p></li>
+          <li class="stat"><p class="stat__num">26.3%</p><p class="stat__label">對學習程式缺乏興趣</p></li>
           <li class="stat"><p class="stat__num">45%</p><p class="stat__label">家長認為現有平台內容枯燥</p></li>
         </ul>
 
         <blockquote class="pull-quote">
-          問題不是孩子學不會，而是他們不知道從哪裡開始。
+          如何降低程式學習的入門門檻，並透過互動與遊戲化提升孩子的學習動機？
         </blockquote>
       </div>
     </section>
@@ -121,22 +121,68 @@
         <header class="stage__head">
           <p class="stage__num">02</p>
           <h2 class="stage__title">使用者研究</h2>
-          <p class="stage__lead">244 份問卷，對象涵蓋國小、國中、高中生與家長。</p>
+          <p class="stage__lead">前期透過線上問卷蒐集不同年齡學生與家長的學習經驗，並依調查結果，將核心使用者收斂為國小程式初學者。</p>
         </header>
 
-        <div class="grid grid--2">
-          <figure class="figure">
-            <div class="ph ph--16x9" data-ph="學生問卷　assets/rightcode/survey-students.png">
-            <img src="assets/rightcode/survey-students.png" alt="學生問卷結果" loading="lazy">
-          </div>
-            <figcaption>學生：47% 偏好小遊戲闖關、34% 玩動作類遊戲</figcaption>
-          </figure>
-          <figure class="figure">
-            <div class="ph ph--16x9" data-ph="家長問卷　assets/rightcode/survey-parents.png">
-            <img src="assets/rightcode/survey-parents.png" alt="家長問卷結果" loading="lazy">
-          </div>
-            <figcaption>家長：70% 要實際操作、65% 接受遊戲化、40% 每次一小時</figcaption>
-          </figure>
+        <ul class="survey-meta">
+          <li><span class="survey-meta__k">線上問卷調查</span><span class="survey-meta__v">共 244 份有效回覆</span></li>
+          <li><span class="survey-meta__k">調查對象</span><span class="survey-meta__v">國小至高中學生及家長</span></li>
+        </ul>
+
+        <div class="grid grid--2 insight-grid">
+          <article class="insight-card">
+            <p class="insight-card__label">學生端洞察</p>
+
+            <ul class="insight-card__stats">
+              <li>
+                <p class="insight-card__num">47%</p>
+                <p class="insight-card__stat-label">偏好小遊戲與闖關活動</p>
+              </li>
+              <li>
+                <p class="insight-card__num">34%</p>
+                <p class="insight-card__stat-label">偏好動作類遊戲</p>
+              </li>
+            </ul>
+
+            <div class="insight-card__row">
+              <p class="insight-card__row-label">洞察</p>
+              <p class="insight-card__row-text">單純閱讀教材較難維持兒童的學習動機，具目標與即時回饋的活動更容易引導孩子持續參與。</p>
+            </div>
+
+            <div class="insight-card__row">
+              <p class="insight-card__row-label">設計回應</p>
+              <p class="insight-card__row-text">將學習內容拆分為短任務，加入故事引導、闖關機制、角色陪伴與即時答題回饋。</p>
+            </div>
+          </article>
+
+          <article class="insight-card">
+            <p class="insight-card__label">家長端洞察</p>
+
+            <ul class="insight-card__stats">
+              <li>
+                <p class="insight-card__num">70%</p>
+                <p class="insight-card__stat-label">希望增加實際操作</p>
+              </li>
+              <li>
+                <p class="insight-card__num">65%</p>
+                <p class="insight-card__stat-label">接受遊戲化學習</p>
+              </li>
+              <li>
+                <p class="insight-card__num">40%</p>
+                <p class="insight-card__stat-label">認為每次一小時較合適</p>
+              </li>
+            </ul>
+
+            <div class="insight-card__row">
+              <p class="insight-card__row-label">洞察</p>
+              <p class="insight-card__row-text">家長重視孩子是否能實際練習，也期望課程具備適當的學習時長與清楚的學習成果。</p>
+            </div>
+
+            <div class="insight-card__row">
+              <p class="insight-card__row-label">設計回應</p>
+              <p class="insight-card__row-text">每個學習單元加入互動練習、課後測驗與進度紀錄，讓孩子能立即應用所學。</p>
+            </div>
+          </article>
         </div>
 
         <figure class="figure figure--wide">

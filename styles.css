@@ -805,6 +805,80 @@ h1, h2, h3, h4 {
   color: var(--ink-soft);
 }
 
+/* 問卷資訊列（說明總回覆數，避免被誤讀成兩組各有一份樣本） */
+.survey-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2) var(--sp-6);
+  margin-top: var(--sp-4);
+  padding-top: var(--sp-3);
+  border-top: 1px solid var(--rule);
+}
+.survey-meta li { display: flex; align-items: baseline; gap: 8px; }
+.survey-meta__k {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.survey-meta__v { font-size: var(--fs-small); color: var(--ink-soft); }
+
+/* 研究洞察卡 */
+.insight-grid { margin-top: clamp(2rem, 5vw, 3rem); }
+
+.insight-card {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--paper-card);
+  padding: clamp(1.5rem, 3vw, 2rem);
+}
+.insight-card__label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.insight-card__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3) var(--sp-4);
+  margin-top: var(--sp-3);
+  padding-top: var(--sp-3);
+  border-top: 1px solid var(--rule);
+}
+.insight-card__stats li { flex: 1 1 100px; }
+.insight-card__num {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--accent);
+}
+.insight-card__stat-label {
+  margin-top: var(--sp-1);
+  font-size: var(--fs-small);
+  color: var(--ink-soft);
+}
+
+.insight-card__row { margin-top: var(--sp-4); }
+.insight-card__row-label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.insight-card__row-text {
+  margin-top: var(--sp-1);
+  font-size: var(--fs-small);
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
 /* 引言 */
 .pull-quote {
   margin-top: var(--sp-6);
