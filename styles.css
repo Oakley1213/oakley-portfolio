@@ -74,7 +74,7 @@ body {
   line-height: 1.75;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  overflow-x: hidden;
+  overflow-wrap: break-word;
 }
 
 img, svg, video { display: block; max-width: 100%; height: auto; }
@@ -100,9 +100,9 @@ h1, h2, h3, h4 {
 
 .section, .stage { padding-block: var(--section-y); }
 
-.grid { display: grid; gap: var(--sp-4); }
+.grid { display: grid; gap: var(--sp-4); min-width: 0; }
 @media (min-width: 768px) {
-  .grid--2 { grid-template-columns: 1fr 1fr; gap: var(--sp-6); }
+  .grid--2 { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--sp-6); }
 }
 
 .eyebrow {
@@ -197,19 +197,31 @@ h1, h2, h3, h4 {
 }
 .wordmark:hover .wordmark__dot { transform: translateY(-4px) scale(1.3); }
 
-.nav__list { display: flex; gap: var(--sp-4); }
+/* 導覽連結只有「關於我」「聯絡我」兩個，任何寬度都排得下，
+   所以三種版型都直接橫向排列，不做漢堡選單／收合面板。
+   .nav-toggle 的 HTML／JS 還在（保留給未來連結變多時用），
+   但視覺上永遠隱藏。 */
+.nav__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  min-width: 0;
+}
+@media (min-width: 700px) { .nav__list { gap: var(--sp-4); } }
 
 .nav__link {
   position: relative;
+  display: inline-flex;
+  align-items: center;
   font-size: var(--fs-small);
   color: var(--ink-soft);
-  padding-block: 4px;
+  padding-block: 10px; /* 連同行高湊到 ≥44px，觸控好按 */
   transition: color .3s var(--ease);
 }
 .nav__link::after {
   content: "";
   position: absolute;
-  left: 0; bottom: 0;
+  left: 0; bottom: 6px;
   width: 100%; height: 1px;
   background: currentColor;
   transform: scaleX(0);
@@ -221,7 +233,7 @@ h1, h2, h3, h4 {
 .nav__link.is-active { color: var(--ink); }
 .nav__link.is-active::after { transform: scaleX(1); background: var(--accent); }
 
-.nav-toggle { display: none; width: 40px; height: 40px; margin-right: -8px; position: relative; }
+.nav-toggle { display: none; }
 .nav-toggle__bar {
   position: absolute;
   left: 9px;
@@ -234,35 +246,13 @@ h1, h2, h3, h4 {
 .nav-toggle[aria-expanded="true"] .nav-toggle__bar:nth-child(1) { transform: translateY(3px) rotate(45deg); }
 .nav-toggle[aria-expanded="true"] .nav-toggle__bar:nth-child(2) { transform: translateY(-3px) rotate(-45deg); }
 
-@media (max-width: 700px) {
-  .nav-toggle { display: block; }
-  .nav {
-    position: fixed;
-    inset: var(--head-h) 0 auto 0;
-    background: var(--paper);
-    border-bottom: 1px solid var(--rule);
-    padding: var(--sp-2) var(--gutter) var(--sp-4);
-    clip-path: inset(0 0 100% 0);
-    transition: clip-path .5s var(--ease-out);
-  }
-  .nav.is-open { clip-path: inset(0 0 0 0); }
-  .nav__list { flex-direction: column; gap: 0; }
-  .nav__link {
-    display: block;
-    font-size: 1.25rem;
-    font-family: var(--font-display);
-    font-weight: 500;
-    padding-block: var(--sp-2);
-    border-bottom: 1px solid var(--rule);
-  }
-  .nav__link::after { display: none; }
-}
-
 /* 專案頁的「← 回到首頁」 */
 .back-link {
   display: inline-flex;
   align-items: center;
   gap: 10px;
+  padding-block: 10px; /* 觸控高度湊到 ≥44px */
+  margin-block: -10px; /* 不影響上下鄰接元素的視覺間距 */
   font-size: var(--fs-small);
   color: var(--ink-soft);
   transition: color .3s var(--ease);
@@ -324,7 +314,7 @@ h1, h2, h3, h4 {
 }
 .hero__meta li {
   display: grid;
-  grid-template-columns: 5.5rem 1fr;
+  grid-template-columns: 5.5rem minmax(0, 1fr);
   gap: var(--sp-2);
   align-items: baseline;
   padding-block: var(--sp-2);
@@ -342,11 +332,11 @@ h1, h2, h3, h4 {
 @media (min-width: 900px) {
   .hero__meta {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     border-bottom: 1px solid var(--rule);
   }
   .hero__meta li {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: var(--sp-1);
     border-bottom: 0;
     border-right: 1px solid var(--rule);
@@ -595,7 +585,7 @@ h1, h2, h3, h4 {
 
 .about__grid { display: grid; gap: var(--sp-6); }
 @media (min-width: 860px) {
-  .about__grid { grid-template-columns: 5fr 7fr; gap: clamp(3rem, 6vw, 5rem); }
+  .about__grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(3rem, 6vw, 5rem); }
 }
 
 .skill-list {
@@ -653,6 +643,9 @@ h1, h2, h3, h4 {
   border-top: 1px solid var(--rule);
 }
 .contact__links a {
+  display: inline-block;
+  padding-block: 10px;
+  margin-block: -10px;
   font-size: var(--fs-small);
   color: var(--ink-soft);
   transition: color .3s var(--ease);
@@ -676,7 +669,12 @@ h1, h2, h3, h4 {
   letter-spacing: .08em;
   color: var(--ink-mute);
 }
-.to-top { transition: color .3s var(--ease); }
+.to-top {
+  display: inline-block;
+  padding-block: 10px;
+  margin-block: -10px;
+  transition: color .3s var(--ease);
+}
 .to-top:hover { color: var(--accent); }
 
 
@@ -700,24 +698,37 @@ h1, h2, h3, h4 {
 }
 .page-hero__cover { margin-top: clamp(2rem, 5vw, 3.5rem); }
 
-/* 事實欄 */
+/* 事實欄：iPhone 單欄／iPad 兩欄／電腦四欄 */
 .factbar {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   margin-top: clamp(2rem, 5vw, 3rem);
   border-top: 1px solid var(--rule);
   border-bottom: 1px solid var(--rule);
 }
-@media (min-width: 860px) { .factbar { grid-template-columns: repeat(4, 1fr); } }
 .factbar__item {
-  padding: var(--sp-3) var(--sp-3) var(--sp-3) 0;
-  border-right: 1px solid var(--rule);
+  padding-block: var(--sp-3);
+  border-top: 1px solid var(--rule);
 }
-.factbar__item + .factbar__item { padding-left: var(--sp-3); }
-.factbar__item:nth-child(2n) { border-right: 0; }
-@media (min-width: 860px) {
-  .factbar__item:nth-child(2n) { border-right: 1px solid var(--rule); }
-  .factbar__item:last-child { border-right: 0; }
+.factbar__item:first-child { border-top: 0; }
+
+@media (min-width: 768px) {
+  .factbar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .factbar__item {
+    padding: var(--sp-3) var(--sp-3) var(--sp-3) 0;
+    border-top: 0;
+    border-left: 1px solid var(--rule);
+  }
+  .factbar__item:nth-child(2n+1) { border-left: 0; padding-left: 0; }
+  .factbar__item:nth-child(2n) { border-left: 1px solid var(--rule); padding-left: var(--sp-3); }
+  .factbar__item:nth-child(n+3) { border-top: 1px solid var(--rule); }
+}
+
+@media (min-width: 1200px) {
+  .factbar { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .factbar__item:nth-child(n+3) { border-top: 0; }
+  .factbar__item:nth-child(4n+1) { border-left: 0; padding-left: 0; }
+  .factbar__item:not(:nth-child(4n+1)) { border-left: 1px solid var(--rule); padding-left: var(--sp-3); }
 }
 .factbar dt {
   font-family: var(--font-mono);
@@ -785,7 +796,7 @@ h1, h2, h3, h4 {
   border-top: 1px solid var(--rule);
 }
 @media (min-width: 700px) {
-  .stat-row { grid-template-columns: repeat(3, 1fr); gap: 0; }
+  .stat-row { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; }
   .stat { border-right: 1px solid var(--rule); padding-right: var(--sp-3); }
   .stat + .stat { padding-left: var(--sp-3); }
   .stat:last-child { border-right: 0; }
@@ -824,8 +835,16 @@ h1, h2, h3, h4 {
 }
 .survey-meta__v { font-size: var(--fs-small); color: var(--ink-soft); }
 
-/* 研究洞察卡 */
-.insight-grid { margin-top: clamp(2rem, 5vw, 3rem); }
+/* 研究洞察卡：獨立於 .grid--2 的斷點——768px 時卡片仍偏窄，
+   家長卡 3 個數據會擠成 2+1 折行，所以延後到 1100px 才切兩欄。 */
+.insight-grid {
+  display: grid;
+  gap: var(--sp-4);
+  margin-top: clamp(2rem, 5vw, 3rem);
+}
+@media (min-width: 1100px) {
+  .insight-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--sp-6); }
+}
 
 .insight-card {
   border: 1px solid var(--rule);
@@ -917,6 +936,24 @@ figcaption {
   color: var(--accent);
 }
 
+/* 圖片上方的小標題（例：Empathy Map · Primary User） */
+.figure__head { margin-bottom: var(--sp-2); }
+.figure__head-note {
+  margin-top: var(--sp-1);
+  font-size: var(--fs-small);
+  color: var(--ink-mute);
+}
+
+/* 圖片下方的洞察／設計方向並排說明 */
+.figure__insight {
+  margin-top: var(--sp-3);
+  display: grid;
+  gap: var(--sp-3);
+}
+@media (min-width: 700px) {
+  .figure__insight { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--sp-6); }
+}
+
 /* 人物誌 */
 .persona {
   display: grid;
@@ -925,7 +962,7 @@ figcaption {
   border-top: 1px solid var(--rule);
 }
 @media (min-width: 560px) {
-  .persona { grid-template-columns: 96px 1fr; gap: var(--sp-3); }
+  .persona { grid-template-columns: 96px minmax(0, 1fr); gap: var(--sp-3); }
 }
 .persona__avatar { border-radius: 50%; overflow: hidden; }
 .persona__avatar::after { font-size: 10px; }
@@ -946,9 +983,10 @@ figcaption {
   color: var(--ink-mute);
 }
 
-/* 設計原則三支柱 */
+/* 設計原則三支柱：iPhone 單欄／iPad 兩欄／電腦三欄 */
 .pillars { display: grid; gap: var(--sp-4); margin-top: var(--sp-6); }
-@media (min-width: 860px) { .pillars { grid-template-columns: repeat(3, 1fr); gap: var(--sp-6); } }
+@media (min-width: 768px) { .pillars { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-6); } }
+@media (min-width: 1200px) { .pillars { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .pillar { padding-top: var(--sp-3); border-top: 1px solid var(--rule); }
 .pillar__num {
   font-family: var(--font-mono);
@@ -961,7 +999,89 @@ figcaption {
 
 /* 初版 vs 定版 */
 .compare { display: grid; gap: var(--sp-4); }
-@media (min-width: 768px) { .compare { grid-template-columns: 1fr 1fr; gap: var(--sp-6); } }
+@media (min-width: 768px) { .compare { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--sp-6); } }
+
+/* 資訊架構圖（Before / After）：全寬、原比例，不裁切 */
+.diagram-figure { margin-block: clamp(2rem, 5vw, 3.5rem); }
+.diagram-figure__frame {
+  display: block;
+  margin-top: var(--sp-2);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: border-color .3s var(--ease);
+}
+.diagram-figure__frame img { display: block; width: 100%; height: auto; }
+@media (hover: hover) {
+  .diagram-figure__frame:hover { border-color: var(--accent); }
+}
+.diagram-figure__note {
+  margin-top: var(--sp-2);
+  font-size: var(--fs-small);
+  color: var(--ink-mute);
+  max-width: 62ch;
+}
+
+/* 取捨依據（Before / After 之間） */
+.tradeoff {
+  margin-block: clamp(2rem, 5vw, 3.5rem);
+  padding-top: clamp(2rem, 5vw, 3.5rem);
+  border-top: 1px solid var(--rule);
+}
+
+.deferred { margin-top: var(--sp-4); }
+.deferred__label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-bottom: var(--sp-1);
+}
+.deferred .tag-list { justify-content: flex-start; }
+
+/* 線框到視覺系統：兩個子段落 */
+.substage + .substage {
+  margin-top: clamp(2rem, 5vw, 3.5rem);
+  padding-top: clamp(2rem, 5vw, 3.5rem);
+  border-top: 1px solid var(--rule);
+}
+
+/* 流程摘要（Wireframe） */
+.flow-line {
+  margin-top: var(--sp-3);
+  padding-top: var(--sp-3);
+  border-top: 1px solid var(--rule);
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  letter-spacing: .02em;
+  color: var(--ink-soft);
+}
+
+/* 色彩／字體：圖片＋文字交錯的橫向區塊
+   用 Grid + minmax(0,...) 取代原本的 flex 65%/35%——
+   65%+35%+gap 的寬度總和其實超過 100%，且 flex-shrink:0 的
+   文字欄不會讓步，較窄的內容容器下文字會被裁掉或推出畫面。
+   iPad 寬度文字欄仍偏窄，所以維持單欄到 1100px 才切兩欄，
+   一律圖片在前、文字在後；桌面版用 order 讓第二列反過來。 */
+.showcase-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--sp-4);
+  margin-top: clamp(2rem, 5vw, 3rem);
+}
+.showcase-row__media .diagram-figure__frame { margin-top: 0; }
+.showcase-row__title { font-size: var(--fs-h4); margin-bottom: var(--sp-2); }
+
+@media (min-width: 1100px) {
+  .showcase-row {
+    grid-template-columns: minmax(0, 65fr) minmax(0, 35fr);
+    align-items: center;
+    gap: var(--sp-6);
+  }
+  .showcase-row--reverse { grid-template-columns: minmax(0, 35fr) minmax(0, 65fr); }
+  .showcase-row--reverse .showcase-row__media { order: 2; }
+}
 
 /* 四次改版：橫向並列 */
 .iteration {
@@ -970,10 +1090,10 @@ figcaption {
   margin-top: var(--sp-4);
   /* 手機用 2×2，四個版本仍在同一個畫面裡可以互相比較；
      單欄堆疊會變成近 5000px 的捲動，反而看不出演進。 */
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
 }
-@media (min-width: 700px) { .iteration { grid-template-columns: repeat(4, 1fr); } }
-.iteration__step { display: flex; flex-direction: column; }
+@media (min-width: 700px) { .iteration { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.iteration__step { display: flex; flex-direction: column; container-type: inline-size; }
 .iteration__label {
   font-family: var(--font-mono);
   font-size: var(--fs-mono);
@@ -988,11 +1108,14 @@ figcaption {
   margin-top: 6px;
 }
 
-/* 最終介面圖廊 */
+/* 最終介面圖廊：iPhone 單欄／iPad 兩欄／電腦三欄 */
 .gallery { display: grid; gap: var(--sp-4); }
 @media (min-width: 768px) {
-  .gallery { grid-template-columns: 1fr 1fr; gap: var(--sp-6); }
+  .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-6); }
   .gallery__item--wide { grid-column: 1 / -1; }
+}
+@media (min-width: 1200px) {
+  .gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 .gallery .figure { margin: 0; }
 
@@ -1019,7 +1142,7 @@ figcaption {
 .anno__list { display: grid; gap: var(--sp-3); }
 .anno__list li {
   display: grid;
-  grid-template-columns: 26px 1fr;
+  grid-template-columns: 26px minmax(0, 1fr);
   gap: var(--sp-2);
   align-items: start;
   font-size: var(--fs-small);
@@ -1041,7 +1164,8 @@ figcaption {
 
 /* 功能特色列 */
 .feature-row { display: grid; gap: var(--sp-4); margin-top: var(--sp-6); }
-@media (min-width: 860px) { .feature-row { grid-template-columns: repeat(3, 1fr); gap: var(--sp-6); } }
+@media (min-width: 768px) { .feature-row { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-6); } }
+@media (min-width: 1200px) { .feature-row { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .feature { padding-top: var(--sp-3); border-top: 1px solid var(--rule); }
 .feature h4 { font-size: var(--fs-h4); margin-bottom: var(--sp-1); }
 .feature p { font-size: var(--fs-small); color: var(--ink-soft); }
@@ -1160,7 +1284,7 @@ figcaption {
   align-items: baseline;
 }
 @media (min-width: 700px) {
-  .fontlist__row { grid-template-columns: 16rem 1fr; gap: var(--sp-4); }
+  .fontlist__row { grid-template-columns: 16rem minmax(0, 1fr); gap: var(--sp-4); }
 }
 .fontlist dt {
   font-family: var(--font-mono);
@@ -1226,13 +1350,22 @@ figcaption {
    套固定比例會把畫面裁掉。改成等高、寬度隨原圖，
    四個版本才能在同一條水平線上比較整頁的演進。 */
 /* 等高的框 + contain 置中：四個版本的上下緣完全對齊。
-   高度取 62vw，桌機時剛好讓最寬的版本（0.32）填滿欄寬。
-   （不用 height:100%，因為它在置中的 grid item 上不會解析成父層高度） */
+   原本用 62vw 抓高度，只在桌機 4 欄時湊得出合理比例；
+   手機是 2 欄，欄寬只有視窗的一小部分，62vw 換算出的高度
+   遠大於欄寬需要的高度，框裡留下大片空白。
+   改用容器查詢單位 cqw（相對於 .iteration__step 自己的寬度），
+   同一條公式在 2 欄／4 欄、任何斷點下都會依欄寬自動算出
+   「最寬版本（0.32）剛好填滿欄寬」的高度，不必為每個斷點
+   另外調數字。 */
 .ph--shot {
   aspect-ratio: auto;
-  height: clamp(420px, 62vw, 800px);
+  height: clamp(140px, 312cqw, 800px);
 }
 .ph--shot > img { object-fit: contain; }
+/* 不支援 container query 的舊瀏覽器：退回桌機取向的估算值 */
+@supports not (container-type: inline-size) {
+  .ph--shot { height: clamp(200px, 62vw, 800px); }
+}
 
 /* .ph 的圓角在後面定義，會蓋掉前面的 .persona__avatar（同權重、後者勝），
    這裡提高一級把人物誌的圓形拿回來 */
@@ -1249,13 +1382,20 @@ figcaption {
 
 
 /* ---------- 17. 無障礙 --------------------------------------- */
+/* 用 translateY 移出畫面上方，不用 left:-9999px——
+   後者會被視為文件內容，撐大 body 的 scrollWidth，
+   在部分瀏覽器造成看不見成因的水平捲動。 */
 .skip-link {
-  position: absolute; left: -9999px;
+  position: absolute;
+  top: 0; left: var(--sp-2);
+  transform: translateY(-120%);
   background: var(--ink); color: var(--paper);
   padding: var(--sp-1) var(--sp-2);
   border-radius: var(--radius);
+  z-index: 100;
+  transition: transform .2s var(--ease);
 }
-.skip-link:focus { left: var(--sp-2); top: var(--sp-2); z-index: 100; }
+.skip-link:focus { transform: translateY(var(--sp-2)); }
 
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 

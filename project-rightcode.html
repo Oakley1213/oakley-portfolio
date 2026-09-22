@@ -129,7 +129,7 @@
           <li><span class="survey-meta__k">調查對象</span><span class="survey-meta__v">國小至高中學生及家長</span></li>
         </ul>
 
-        <div class="grid grid--2 insight-grid">
+        <div class="insight-grid">
           <article class="insight-card">
             <p class="insight-card__label">學生端洞察</p>
 
@@ -186,10 +186,25 @@
         </div>
 
         <figure class="figure figure--wide">
-          <div class="ph ph--16x9" data-ph="同理心地圖　assets/rightcode/empathy-map.png">
-            <img src="assets/rightcode/empathy-map.png" alt="同理心地圖" loading="lazy">
+          <div class="figure__head">
+            <p class="eyebrow">Empathy Map · Primary User</p>
+            <p class="figure__head-note">依據問卷選擇題與開放式回覆進行整理</p>
           </div>
-          <figcaption>把問卷的開放題整理成同理心地圖，孩子與家長的說法放在同一張紙上比對。</figcaption>
+
+          <a class="diagram-figure__frame" href="assets/rightcode/empathy-map.png" target="_blank" rel="noopener" aria-label="以原始尺寸開啟同理心地圖">
+            <img src="assets/rightcode/empathy-map.png" alt="同理心地圖：整理學生與家長在問卷開放題中的說法、想法、痛點與期待" loading="lazy">
+          </a>
+
+          <div class="figure__insight">
+            <div>
+              <p class="insight-card__row-label">核心洞察</p>
+              <p class="insight-card__row-text">孩子並非排斥程式，而是需要清楚的起點、循序引導與持續的成就回饋。</p>
+            </div>
+            <div>
+              <p class="insight-card__row-label">設計方向</p>
+              <p class="insight-card__row-text">簡化入門流程，以故事、角色陪伴、短任務及即時回饋降低學習門檻。</p>
+            </div>
+          </div>
         </figure>
 
         <div class="grid grid--2">
@@ -238,9 +253,9 @@
         </header>
 
         <figure class="figure figure--wide">
-          <div class="ph ph--16x9" data-ph="SWOT 分析　assets/rightcode/swot.png">
-            <img src="assets/rightcode/swot.png" alt="SWOT 分析" loading="lazy">
-          </div>
+          <a class="diagram-figure__frame" href="assets/rightcode/swot.png" target="_blank" rel="noopener" aria-label="以原始尺寸開啟 SWOT 分析">
+            <img src="assets/rightcode/swot.png" alt="SWOT 分析：優勢、劣勢、機會與威脅四象限" loading="lazy">
+          </a>
         </figure>
 
         <ol class="pillars">
@@ -269,30 +284,56 @@
       <div class="container">
         <header class="stage__head">
           <p class="stage__num">04</p>
-          <h2 class="stage__title">資訊架構：砍掉一半</h2>
-          <p class="stage__lead">初版塞了論壇與職業介紹，但那是給大人看的。定版只留孩子會用到的三條主線。</p>
+          <h2 class="stage__title">資訊架構：從 5 個分類收斂為 3 條核心路徑</h2>
+          <p class="stage__lead">初版同時包含學習、論壇、職涯探索與會員功能，但功能範圍過廣，也分散了兒童程式入門的核心目標。因此，我們依據問卷洞察與開發時程，將架構收斂為首頁、學習專區與會員專區三條主要路徑。</p>
         </header>
 
-        <div class="compare">
-          <figure class="figure">
-            <div class="ph ph--16x9" data-ph="架構初版　assets/rightcode/sitemap-v1.png">
-            <img src="assets/rightcode/sitemap-v1.png" alt="網站架構圖初版" loading="lazy">
+        <figure class="diagram-figure">
+          <p class="eyebrow">BEFORE · 初版</p>
+          <a class="diagram-figure__frame" href="assets/rightcode/sitemap-v1.png" target="_blank" rel="noopener" aria-label="以原始尺寸開啟初版架構圖">
+            <img src="assets/rightcode/sitemap-v1.png" alt="網站架構圖初版：5 個主分類，包含學習、論壇、職涯探索與會員中心" loading="lazy">
+          </a>
+          <p class="diagram-figure__note">5 個主分類｜同時包含學習、論壇與職涯探索，功能範圍較為分散。</p>
+        </figure>
+
+        <div class="tradeoff">
+          <p class="eyebrow">取捨依據</p>
+
+          <ol class="pillars">
+            <li class="pillar">
+              <h3 class="pillar__title">使用者需求</h3>
+              <p>優先回應孩子容易開始、實際操作與持續獲得回饋的需求。</p>
+            </li>
+            <li class="pillar">
+              <h3 class="pillar__title">核心任務</h3>
+              <p>將主要流程集中在「認識平台 → 進入課程 → 完成練習 → 查看進度」。</p>
+            </li>
+            <li class="pillar">
+              <h3 class="pillar__title">開發可行性</h3>
+              <p>在有限的專案時程內，優先完成能形成完整學習體驗的核心功能。</p>
+            </li>
+          </ol>
+
+          <div class="deferred">
+            <p class="deferred__label">延後至後續版本</p>
+            <ul class="tag-list">
+              <li class="tag">論壇</li>
+              <li class="tag">職業介紹</li>
+              <li class="tag">JavaScript 課程</li>
+              <li class="tag">點數存摺</li>
+            </ul>
           </div>
-            <figcaption><span class="figcap__tag">初版</span>5 個主分類、含論壇與職業介紹</figcaption>
-          </figure>
-          <figure class="figure">
-            <div class="ph ph--16x9" data-ph="架構定版　assets/rightcode/sitemap-v2.png">
-            <img src="assets/rightcode/sitemap-v2.png" alt="網站架構圖定版" loading="lazy">
-          </div>
-            <figcaption><span class="figcap__tag figcap__tag--on">定版</span>3 個主分類，砍掉 JavaScript 與點數存摺</figcaption>
-          </figure>
         </div>
 
-        <div class="prose">
-          <!-- ✏️ 這段最值錢：寫清楚「為什麼砍」。
-               例：JavaScript 對國小生太陡，先把 HTML/CSS 的成就感做滿。 -->
-          <p>（寫下你們為什麼做這個取捨——面試官會追問的就是這一段。）</p>
-        </div>
+        <figure class="diagram-figure">
+          <p class="eyebrow">AFTER · 定版</p>
+          <a class="diagram-figure__frame" href="assets/rightcode/sitemap-v2.png" target="_blank" rel="noopener" aria-label="以原始尺寸開啟定版架構圖">
+            <img src="assets/rightcode/sitemap-v2.png" alt="網站架構圖定版：3 個核心分類，首頁、學習專區與會員專區" loading="lazy">
+          </a>
+          <p class="diagram-figure__note">3 個核心分類｜首頁、學習專區與會員專區，共同形成完整的學習路徑。</p>
+        </figure>
+
+        <p class="pull-quote">我們不以功能數量衡量完整度，而是優先確保孩子能順利完成一次完整的學習循環。</p>
       </div>
     </section>
 
@@ -302,29 +343,72 @@
       <div class="container">
         <header class="stage__head">
           <p class="stage__num">05</p>
-          <h2 class="stage__title">線框稿與視覺系統</h2>
+          <h2 class="stage__title">從線框到視覺系統</h2>
+          <p class="stage__lead">在進入高擬真設計前，我們先透過線框稿梳理內容層級與學習節奏，再建立適合兒童使用者的色彩與字體規範。</p>
         </header>
 
-        <figure class="figure figure--wide">
-          <div class="ph ph--16x9" data-ph="Wireframe 全頁　assets/rightcode/wireframe.png">
-            <img src="assets/rightcode/wireframe.png" alt="RightCode 線框稿" loading="lazy">
+        <div class="substage">
+          <p class="eyebrow">Wireframe｜先建立完整的學習流程</p>
+          <div class="prose">
+            <p>線框階段將首頁與學習頁設定為核心內容。首頁先協助使用者理解平台定位與特色，再透過明確的行動按鈕進入學習專區；學習頁則依照「引導思考、概念說明、重點整理、互動練習」安排內容順序。</p>
           </div>
-        </figure>
+          <p class="flow-line">理解平台價值 → 選擇學習主題 → 引導思考 → 理解概念 → 完成練習</p>
 
-        <div class="grid grid--2">
-          <figure class="figure">
-            <div class="ph ph--16x9" data-ph="色票　assets/rightcode/colors.png">
-            <img src="assets/rightcode/colors.png" alt="色彩系統" loading="lazy">
-          </div>
-            <figcaption>高彩度主色配上白色描邊，確保在黃底上仍有足夠對比。</figcaption>
-          </figure>
-          <figure class="figure">
-            <div class="ph ph--16x9" data-ph="字體　assets/rightcode/type.png">
-            <img src="assets/rightcode/type.png" alt="字體系統：獅尾圓體" loading="lazy">
-          </div>
-            <figcaption>獅尾圓體 Swei Gothic CJK TC，圓角筆畫對孩子更友善。</figcaption>
+          <figure class="diagram-figure">
+            <a class="diagram-figure__frame" href="assets/rightcode/wireframe.png" target="_blank" rel="noopener" aria-label="以原始尺寸開啟線框稿">
+              <img src="assets/rightcode/wireframe.png" alt="RightCode 線框稿：首頁與學習頁的版面配置與內容順序" loading="lazy">
+            </a>
+            <p class="diagram-figure__note">以低擬真線框確認首頁資訊層級、課程入口與單元學習順序。</p>
           </figure>
         </div>
+
+        <div class="substage">
+          <p class="eyebrow">Visual System｜讓學習更容易親近</p>
+
+          <div class="showcase-row">
+            <figure class="showcase-row__media">
+              <a class="diagram-figure__frame" href="assets/rightcode/colors.png" target="_blank" rel="noopener" aria-label="以原始尺寸開啟色彩系統">
+                <img src="assets/rightcode/colors.png" alt="RightCode 色彩系統：黃色主背景搭配角色延伸色與淺色內容區" loading="lazy">
+              </a>
+              <p class="diagram-figure__note">以高彩度色彩建立兒童學習情境，並以淺色內容區維持閱讀清晰度。</p>
+            </figure>
+
+            <div class="showcase-row__text">
+              <h3 class="showcase-row__title">Color System｜以高彩度建立活潑感</h3>
+              <div class="prose">
+                <p>以黃色作為主要背景色，營造明亮、活潑的學習氛圍；紅、藍、綠、粉紅與紫色則延伸至角色與不同內容模組，協助建立辨識度。介面中的學習內容使用白色或淺色區塊承載，並搭配深色文字，避免高彩度背景影響閱讀。</p>
+              </div>
+              <ul class="persona__points">
+                <li>黃色：建立明亮、具有活力的主要場景</li>
+                <li>角色色：區分角色與不同內容模組</li>
+                <li>淺色內容區：提升文字與操作元件的可讀性</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="showcase-row showcase-row--reverse">
+            <figure class="showcase-row__media">
+              <a class="diagram-figure__frame" href="assets/rightcode/type.png" target="_blank" rel="noopener" aria-label="以原始尺寸開啟字體系統">
+                <img src="assets/rightcode/type.png" alt="RightCode 字體系統：獅尾圓體的字重與應用層級" loading="lazy">
+              </a>
+              <p class="diagram-figure__note">以圓潤字形建立親和感，並透過字重差異區分標題、內文與輔助資訊。</p>
+            </figure>
+
+            <div class="showcase-row__text">
+              <h3 class="showcase-row__title">Typography｜兼顧親和力與閱讀層級</h3>
+              <div class="prose">
+                <p>選用獅尾圓體 Swei Gothic CJK TC，圓潤的筆畫能呼應角色插畫與兒童學習情境。標題使用較高字重建立層級，內文與說明文字則使用中等字重，讓較長的課程內容維持清楚易讀。</p>
+              </div>
+              <ul class="persona__points">
+                <li>Black／Bold：頁面標題與重要訊息</li>
+                <li>Medium：內文與課程說明</li>
+                <li>Regular：輔助資訊與次要文字</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <p class="pull-quote">從內容層級、學習節奏到視覺語言，所有設計都回到同一個目標：降低兒童開始學習程式的門檻。</p>
       </div>
     </section>
 
@@ -334,8 +418,8 @@
       <div class="container">
         <header class="stage__head">
           <p class="stage__num">06</p>
-          <h2 class="stage__title">首頁的四次改版</h2>
-          <p class="stage__lead">從線框稿到上線，首頁一共重畫四次。每一次都在解一個具體的問題。</p>
+          <h2 class="stage__title">從資訊堆疊到清楚引導：首頁的四次迭代</h2>
+          <p class="stage__lead">首頁歷經四輪設計迭代，逐步改善資訊層級、視覺一致性與學習路徑，讓孩子能更直覺地理解內容並開始學習。</p>
         </header>
 
         <ol class="iteration">
@@ -343,29 +427,29 @@
             <div class="ph ph--shot" data-ph="v1　iter-1.png">
             <img src="assets/rightcode/iter-1.png" alt="首頁版本一" loading="lazy">
           </div>
-            <p class="iteration__label">v1</p>
-            <p class="iteration__note">區塊排好，但每一段長得一樣，孩子不知道要往哪看。</p>
+            <p class="iteration__label">v1｜資訊層級不明確</p>
+            <p class="iteration__note">內容雖已完整排列，但各區塊的視覺權重過於接近，缺少明確的閱讀順序與行動引導。</p>
           </li>
           <li class="iteration__step">
             <div class="ph ph--shot" data-ph="v2　iter-2.png">
             <img src="assets/rightcode/iter-2.png" alt="首頁版本二" loading="lazy">
           </div>
-            <p class="iteration__label">v2</p>
-            <p class="iteration__note">導入冒險路徑串起內容，但折線太銳利，跟角色的圓潤感打架。</p>
+            <p class="iteration__label">v2｜建立學習路徑</p>
+            <p class="iteration__note">導入冒險路徑串連內容，嘗試建立閱讀順序；但折線造型較生硬，與圓潤的角色風格缺乏一致性。</p>
           </li>
           <li class="iteration__step">
             <div class="ph ph--shot" data-ph="v3　iter-3.png">
             <img src="assets/rightcode/iter-3.png" alt="首頁版本三" loading="lazy">
           </div>
-            <p class="iteration__label">v3</p>
-            <p class="iteration__note">路徑改成曲線並補上中英雙語標題，資訊密度仍偏高。</p>
+            <p class="iteration__label">v3｜統一視覺語言</p>
+            <p class="iteration__note">將折線改為曲線，讓路徑與角色造型更一致，並加入中英雙語標題；但首頁承載的內容仍偏多，主要行動不夠突出。</p>
           </li>
           <li class="iteration__step">
             <div class="ph ph--shot" data-ph="v4 定版　iter-4.png">
             <img src="assets/rightcode/iter-4.png" alt="首頁定版" loading="lazy">
           </div>
-            <p class="iteration__label">v4 · 定版</p>
-            <p class="iteration__note">拉大留白、統一為一條主動線，Start Now 成為畫面唯一終點。</p>
+            <p class="iteration__label">v4｜聚焦主要任務</p>
+            <p class="iteration__note">減少非必要內容並增加留白，將畫面收斂為一條主要學習路徑，讓「Start Now」成為清楚的主要行動入口。</p>
           </li>
         </ol>
       </div>
